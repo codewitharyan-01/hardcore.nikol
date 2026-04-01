@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Hardcore Fitness | Where Discipline Meets Design</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #FFFFFF;
+            color: #0A0A0A;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 8px;
+            height: 8px;
+            background: #0A0A0A;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.2s ease;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(10, 10, 10, 0.2);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.3s ease, width 0.2s, height 0.2s;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 5rem;
+            line-height: 1.1;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.75rem; }
+            h2 { font-size: 2rem; }
+        }
+
+        /* Glassmorphism Nav */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1.25rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.75rem 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: #0A0A0A;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0A0A0A;
+            transition: width 0.3s ease;
+        }
+
+        .logo:hover::after {
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #0A0A0A;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: opacity 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #0A0A0A;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, #F5F5F5 0%, #FFFFFF 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(10, 10, 10, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: #666;
+            max-width: 500px;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-number {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0A0A0A;
+        }
+
+        .hero-stat-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: #0A0A0A;
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Space Grotesk', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #D4D4D4;
+            color: #0A0A0A;
+            padding: 1rem 2.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .btn-outline:hover {
+            border-color: #0A0A0A;
+            background: #FAFAFA;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 7rem 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .about-features {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            text-align: left;
+        }
+
+        .about-feature-number {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0A0A0A;
+        }
+
+        .about-feature-label {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+
+        .about-image:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* Programs Grid */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .program-card {
+            background: #FFFFFF;
+            border: 1px solid #F0F0F0;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: #FAFAFA;
+            transition: height 0.4s ease;
+            z-index: -1;
+        }
+
+        .program-card:hover::before {
+            height: 100%;
+        }
+
+        .program-card:hover {
+            border-color: #D4D4D4;
+            transform: translateY(-8px);
+        }
+
+        .program-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #0A0A0A;
+        }
+
+        .program-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .program-card p {
+            font-size: 0.875rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Features Minimal */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            background: #FAFAFA;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            background: #F5F5F5;
+            transform: translateY(-4px);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: #0A0A0A;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .feature h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature p {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        /* Membership Plans */
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .plan {
+            background: #FFFFFF;
+            border: 1px solid #F0F0F0;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .plan.popular {
+            border: 1px solid #0A0A0A;
+            background: #FAFAFA;
+        }
+
+        .plan:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: #0A0A0A;
+            color: white;
+            font-size: 0.625rem;
+            padding: 0.25rem 0.75rem;
+            font-weight: 500;
+        }
+
+        .plan h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0;
+            color: #0A0A0A;
+        }
+
+        .price span {
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: #999;
+        }
+
+        .plan ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .plan li {
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .plan li i {
+            font-size: 0.75rem;
+            color: #0A0A0A;
+        }
+
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: #FAFAFA;
+            border: 1px solid #F0F0F0;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            border-color: #D4D4D4;
+        }
+
+        .tool-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .bmi-input {
+            margin: 1rem 0;
+        }
+
+        .bmi-input input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid #E0E0E0;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            background: white;
+            transition: border-color 0.3s;
+        }
+
+        .bmi-input input:focus {
+            outline: none;
+            border-color: #0A0A0A;
+        }
+
+        .bmi-result {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .chat-messages {
+            background: white;
+            border: 1px solid #F0F0F0;
+            padding: 1rem;
+            height: 260px;
+            overflow-y: auto;
+            margin: 1rem 0;
+        }
+
+        .chat-message {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-message.user {
+            text-align: right;
+            color: #0A0A0A;
+        }
+
+        .chat-message.bot {
+            color: #666;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.875rem;
+            border: 1px solid #E0E0E0;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+        }
+
+        .chat-input button {
+            padding: 0.875rem 1.5rem;
+            background: #0A0A0A;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: opacity 0.2s;
+        }
+
+        .chat-input button:hover {
+            opacity: 0.9;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial {
+            padding: 2rem;
+            background: #FAFAFA;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-4px);
+            background: #F5F5F5;
+        }
+
+        .testimonial p {
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-style: normal;
+        }
+
+        .testimonial h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            padding: 2rem;
+            background: #FAFAFA;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info-item i {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: #0A0A0A;
+        }
+
+        .contact-info-item p {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.875rem;
+            margin: 0.5rem 0;
+            border: 1px solid #E0E0E0;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            background: white;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: #0A0A0A;
+        }
+
+        /* Footer */
+        footer {
+            background: #FAFAFA;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid #F0F0F0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col p,
+        .footer-col a {
+            font-size: 0.75rem;
+            color: #999;
+            text-decoration: none;
+            display: block;
+            margin: 0.5rem 0;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: #0A0A0A;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #F0F0F0;
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        /* Sticky CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .sticky-cta a {
+            background: #0A0A0A;
+            color: white;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sticky-cta a:hover {
+            transform: scale(1.1);
+        }
+
+        .sticky-cta .whatsapp {
+            background: #25D366;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .features-grid,
+            .plans-container,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            section {
+                padding: 4rem 0;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid #F0F0F0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .about-grid,
+            .contact-grid,
+            .features-grid,
+            .plans-container,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+            .hero-bg {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">HARDCORE</a>
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Studio</a></li>
+                <li><a href="#about">Philosophy</a></li>
+                <li><a href="#programs">Practice</a></li>
+                <li><a href="#membership">Membership</a></li>
+                <li><a href="#contact">Connect</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge" data-aos="fade-up">
+                <i class="fas fa-dumbbell"></i> EST. 2016 · AHMEDABAD
+            </div>
+            <h1 data-aos="fade-up" data-aos-delay="100">Turn your hopes into reality</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Premium fitness, minimalist approach. Expert guidance, spacious facility, and a community that transforms.</p>
+            <button class="btn-primary" data-aos="fade-up" data-aos-delay="300" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                Begin the journey <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                <div class="hero-stat"><div class="hero-stat-number">8+</div><div class="hero-stat-label">Years</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">2.5k</div><div class="hero-stat-label">Members</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">12k</div><div class="hero-stat-label">Sq.Ft</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">Free</div><div class="hero-stat-label">Trainer Support</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text" data-aos="fade-right">
+                    <div class="section-subtitle">PHILOSOPHY</div>
+                    <h2 style="margin-bottom: 1.5rem;">Beyond the physical</h2>
+                    <p>With over 8 years of experience, Hardcore Fitness has redefined what a premium fitness experience can be. We've built a reputation as Ahmedabad's most spacious, sophisticated yet accessible training ground.</p>
+                    <p>Trusted by 2,499+ members, we believe transformation happens at the intersection of expert guidance, premium equipment, and genuine community. Our mission is singular: turn your hopes into reality.</p>
+                    <div class="about-features">
+                        <div class="about-feature"><div class="about-feature-number">100%</div><div class="about-feature-label">Goal Focus</div></div>
+                        <div class="about-feature"><div class="about-feature-number">24/7</div><div class="about-feature-label">Expert Access</div></div>
+                        <div class="about-feature"><div class="about-feature-number">Premium</div><div class="about-feature-label">Budget Price</div></div>
+                    </div>
+                </div>
+                <div class="about-image" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hardcore Fitness Interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs -->
+    <section id="programs" style="background: #FAFAFA;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">PRACTICE</div>
+                <h2>Training methodologies</h2>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card" data-aos="fade-up" data-aos-delay="100"><div class="program-icon"><i class="fas fa-dumbbell"></i></div><h3>Strength Training</h3><p>Build foundational power with progressive overload and expert coaching.</p></div>
+                <div class="program-card" data-aos="fade-up" data-aos-delay="200"><div class="program-icon"><i class="fas fa-heartbeat"></i></div><h3>Metabolic Conditioning</h3><p>High-intensity protocols designed for sustainable fat loss and endurance.</p></div>
+                <div class="program-card" data-aos="fade-up" data-aos-delay="300"><div class="program-icon"><i class="fas fa-bicycle"></i></div><h3>Cardio Architecture</h3><p>Zone-based training for heart health and athletic performance.</p></div>
+                <div class="program-card" data-aos="fade-up" data-aos-delay="400"><div class="program-icon"><i class="fas fa-music"></i></div><h3>Mind & Movement</h3><p>Yoga, Zumba, and mobility work for complete wellness integration.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section>
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">DISTINCTION</div>
+                <h2>Why Hardcore</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-building"></i><h3>Spacious</h3><p>12,000+ sq.ft of premium space</p></div>
+                <div class="feature" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-rupee-sign"></i><h3>Accessible</h3><p>Premium experience, fair pricing</p></div>
+                <div class="feature" data-aos="fade-up" data-aos-delay="300"><i class="fas fa-chalkboard-user"></i><h3>Guidance</h3><p>Free expert trainer support</p></div>
+                <div class="feature" data-aos="fade-up" data-aos-delay="400"><i class="fas fa-clock"></i><h3>Flexible</h3><p>Train on your schedule</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership -->
+    <section id="membership" style="background: #FAFAFA;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">INVESTMENT</div>
+                <h2>Membership architecture</h2>
+            </div>
+            <div class="plans-container">
+                <div class="plan" data-aos="fade-up" data-aos-delay="100"><h3>Starter</h3><div class="price">1<span> mo</span></div><ul><li><i class="fas fa-check"></i> Full facility access</li><li><i class="fas fa-check"></i> Trainer guidance</li><li><i class="fas fa-check"></i> Group classes</li></ul><button class="btn-outline" onclick="openInquiry('Starter')">Select</button></div>
+                <div class="plan popular" data-aos="fade-up" data-aos-delay="200"><div class="plan-badge">RECOMMENDED</div><h3>Transformer</h3><div class="price">3<span> mo</span></div><ul><li><i class="fas fa-check"></i> Personalized programming</li><li><i class="fas fa-check"></i> Progress tracking</li><li><i class="fas fa-check"></i> 20% savings</li></ul><button class="btn-primary" onclick="openInquiry('Transformer')">Select</button></div>
+                <div class="plan" data-aos="fade-up" data-aos-delay="300"><h3>Beast Mode</h3><div class="price">6<span> mo</span></div><ul><li><i class="fas fa-check"></i> Comprehensive assessment</li><li><i class="fas fa-check"></i> Priority class access</li><li><i class="fas fa-check"></i> Maximum value</li></ul><button class="btn-outline" onclick="openInquiry('Beast Mode')">Select</button></div>
+                <div class="plan" data-aos="fade-up" data-aos-delay="400"><h3>Unbreakable</h3><div class="price">12<span> mo</span></div><ul><li><i class="fas fa-check"></i> Ultimate savings</li><li><i class="fas fa-check"></i> Complimentary kit</li><li><i class="fas fa-check"></i> Student discount</li></ul><button class="btn-outline" onclick="openInquiry('Unbreakable')">Select</button></div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem; font-size: 0.75rem; color: #999;"><i class="fas fa-graduation-cap"></i> Student discounts available with valid ID</p>
+        </div>
+    </section>
+
+    <!-- Smart Tools -->
+    <section>
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">INTELLIGENCE</div>
+                <h2>Fitness tools</h2>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card" data-aos="fade-right"><h3><i class="fas fa-calculator"></i> BMI Index</h3><div class="bmi-input"><input type="number" id="height" placeholder="Height (cm)"></div><div class="bmi-input"><input type="number" id="weight" placeholder="Weight (kg)"></div><button class="btn-primary" onclick="calculateBMI()" style="width: 100%;">Calculate</button><div id="bmiResult" class="bmi-result"></div></div>
+                <div class="tool-card" data-aos="fade-left"><h3><i class="fas fa-robot"></i> AI Coach</h3><div id="chatMessages" class="chat-messages"><div class="chat-message bot">Ask me anything about fitness, nutrition, or training.</div></div><div class="chat-input"><input type="text" id="userInput" placeholder="Your question..."><button onclick="sendMessage()">Send</button></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section style="background: #FAFAFA;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">STORIES</div>
+                <h2>Real transformations</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial" data-aos="fade-up" data-aos-delay="100"><p>"From 95kg to 75kg in 6 months. The trainers didn't just give me a plan — they gave me my life back."</p><h4>— Rahul S.</h4></div>
+                <div class="testimonial" data-aos="fade-up" data-aos-delay="200"><p>"I was intimidated by gyms until I walked in here. Now it's my second home. The community is everything."</p><h4>— Anjali P.</h4></div>
+                <div class="testimonial" data-aos="fade-up" data-aos-delay="300"><p>"Premium equipment, spacious facility, and genuinely supportive trainers. Best decision I made."</p><h4>— Karan M.</h4></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">CONNECT</div>
+                <h2>Begin your journey</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right"><div class="contact-info-item"><i class="fas fa-map-marker-alt"></i><p>Hardcore Fitness, Ahmedabad</p></div><div class="contact-info-item"><i class="fas fa-phone"></i><p>+91 96872 22006</p></div><div class="contact-info-item"><i class="fas fa-envelope"></i><p>hardcorefitnessamd@gmail.com</p></div><div class="contact-info-item"><i class="fas fa-clock"></i><p>Flexible timings · Train at your convenience</p></div></div>
+                <div class="contact-form" data-aos="fade-left"><form id="inquiryForm"><input type="text" id="name" placeholder="Full name" required><input type="tel" id="phone" placeholder="Phone number" required><select id="goal"><option>Weight loss</option><option>Muscle building</option><option>General fitness</option></select><select id="planSelect"><option>Starter (1 Month)</option><option>Transformer (3 Months)</option><option>Beast Mode (6 Months)</option><option>Unbreakable (12 Months)</option></select><button type="submit" class="btn-primary" style="width: 100%;">Register interest</button></form></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col"><h4>Hardcore</h4><p>Turn your hopes into reality</p></div>
+                <div class="footer-col"><h4>Practice</h4><a href="#programs">Strength</a><a href="#programs">Conditioning</a><a href="#programs">Mobility</a></div>
+                <div class="footer-col"><h4>Connect</h4><a href="https://www.youtube.com/@Hardcorefitnes" target="_blank">YouTube</a><a href="https://www.instagram.com/hardcorefitnessahm/" target="_blank">Instagram</a></div>
+                <div class="footer-col"><h4>Contact</h4><p>+91 96872 22006</p><p>hardcorefitnessamd@gmail.com</p></div>
+            </div>
+            <div class="copyright">© 2025 Hardcore Fitness. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Sticky CTA -->
+    <div class="sticky-cta"><a href="tel:+919687222006"><i class="fas fa-phone-alt"></i></a><a href="https://wa.me/919687222006?text=Hi%21%20I%27m%20interested%20in%20joining" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a></div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+            cursorFollower.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+        });
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => { cursorFollower.style.transform = 'scale(1.5)'; cursorFollower.style.borderColor = '#0A0A0A'; });
+            el.addEventListener('mouseleave', () => { cursorFollower.style.transform = 'scale(1)'; cursorFollower.style.borderColor = 'rgba(10,10,10,0.2)'; });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinksEl = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => navLinksEl.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => navLinksEl.classList.remove('active')));
+
+        // BMI Calculator
+        function calculateBMI() {
+            let height = parseFloat(document.getElementById('height').value) / 100;
+            let weight = parseFloat(document.getElementById('weight').value);
+            if (height && weight) {
+                let bmi = (weight / (height * height)).toFixed(1);
+                let category = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal weight' : bmi < 30 ? 'Overweight' : 'Obese';
+                document.getElementById('bmiResult').innerHTML = `<strong>BMI: ${bmi}</strong><br>${category}<br><span style="font-size:0.75rem;">Let's build your plan together.</span>`;
+            } else alert('Please enter height and weight');
+        }
+
+        // AI Chatbot
+        function sendMessage() {
+            let input = document.getElementById('userInput');
+            let msg = input.value.trim();
+            if (!msg) return;
+            let chatDiv = document.getElementById('chatMessages');
+            chatDiv.innerHTML += `<div class="chat-message user">${msg}</div>`;
+            input.value = '';
+            setTimeout(() => {
+                let reply = getReply(msg.toLowerCase());
+                chatDiv.innerHTML += `<div class="chat-message bot">${reply}</div>`;
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            }, 300);
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        }
+
+        function getReply(msg) {
+            if (msg.includes('workout') || msg.includes('exercise')) return 'Strength training 3-4x/week combined with cardio yields optimal results. Visit us for a personalized assessment.';
+            if (msg.includes('diet') || msg.includes('eat')) return 'Focus on whole foods: lean proteins, complex carbohydrates, and healthy fats. Hydration is crucial. Our trainers provide nutrition guidance.';
+            if (msg.includes('weight loss')) return 'Metabolic conditioning combined with strength training is most effective. Join our Transformer program for structured support.';
+            if (msg.includes('timing')) return 'Flexible timings — members train at their convenience. Call us for detailed schedule information.';
+            if (msg.includes('price') || msg.includes('cost')) return 'Monthly, quarterly, half-yearly, and annual plans available. Student discounts offered with valid ID.';
+            return 'Thank you for your question. For personalized guidance, visit us for a complimentary consultation or call +91 96872 22006.';
+        }
+
+        // Form submission
+        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let name = document.getElementById('name').value;
+            alert(`Thank you, ${name}! We'll contact you shortly. Your journey begins now.`);
+            this.reset();
+        });
+
+        function openInquiry(planName) {
+            document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
+            let select = document.getElementById('planSelect');
+            for(let i = 0; i < select.options.length; i++) if(select.options[i].text.includes(planName)) select.selectedIndex = i;
+        }
+    </script>
+</body>
+</html>
