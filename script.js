@@ -547,8 +547,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 14. Creative Testimonial Carousel
     const testiSlides = document.querySelectorAll('.testi-slide');
     const testiDotsContainer = document.querySelector('.testi-dots-c');
-    const testiPrev = document.querySelector('.testi-prev-c');
-    const testiNext = document.querySelector('.testi-next-c');
+    const testiPrevBtns = document.querySelectorAll('.testi-prev-c');
+    const testiNextBtns = document.querySelectorAll('.testi-next-c');
 
     if (testiSlides.length > 0) {
         let currentTesti = 0;
@@ -587,8 +587,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextTesti = () => goToTesti(currentTesti + 1);
         const prevTesti = () => goToTesti(currentTesti - 1);
 
-        if (testiPrev) testiPrev.addEventListener('click', prevTesti);
-        if (testiNext) testiNext.addEventListener('click', nextTesti);
+        testiPrevBtns.forEach(btn => btn.addEventListener('click', prevTesti));
+        testiNextBtns.forEach(btn => btn.addEventListener('click', nextTesti));
 
         const resetTestiInterval = () => {
             clearInterval(testiInterval);
@@ -637,3 +637,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+// 16. Discount Popup Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const popup = document.getElementById('discount-popup');
+    const closePopupBtn = document.getElementById('close-popup');
+
+    if (popup) {
+        // Show after 10 seconds
+        setTimeout(() => {
+            // Only show if it hasn't been closed previously in this session
+            if (!sessionStorage.getItem('discountPopupClosed')) {
+                popup.classList.add('active');
+            }
+        }, 10000);
+
+        if (closePopupBtn) {
+            closePopupBtn.addEventListener('click', () => {
+                popup.classList.remove('active');
+                // Remember that user closed it
+                sessionStorage.setItem('discountPopupClosed', 'true');
+            });
+        }
+    }
+});
+
