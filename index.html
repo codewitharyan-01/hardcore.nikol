@@ -3,30 +3,57 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>HARDCORE FITNESS</title>
     <meta name="description" content="A pristine, focused environment for peak performance.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
+
+    <!-- ====== PRELOADER ====== -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <!-- Logo -->
+            <img src="logo.png" alt="Hardcore Fitness" class="preloader-logo">
+            <!-- Gym Name -->
+            <div class="preloader-name">
+                <span class="preloader-letter">H</span><span class="preloader-letter">A</span><span
+                    class="preloader-letter">R</span><span class="preloader-letter">D</span><span
+                    class="preloader-letter">C</span><span class="preloader-letter">O</span><span
+                    class="preloader-letter">R</span><span class="preloader-letter">E</span>
+            </div>
+            <!-- Tagline -->
+            <p class="preloader-tagline">Turn Your Hopes Into Reality</p>
+            <!-- Progress bar -->
+            <div class="preloader-progress">
+                <div class="preloader-progress-bar" id="preloader-bar"></div>
+            </div>
+        </div>
+    </div>
+    <!-- ====== PRELOADER END ====== -->
 
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="container top-bar-content">
             <div class="top-bar-left">
-                <span id="live-status"><span class="dot"></span><span class="status-text">Checking
-                        Status...</span></span>
-                <span><ion-icon name="call-outline"></ion-icon> +91 90236 68571</span>
+                <span id="live-status"><span class="dot"></span><span class="status-text">Hard Core is
+                        OPEN</span></span>
             </div>
             <div class="top-bar-right">
-                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                <a href="tel:+919687222006" aria-label="Call"><i class="ph-light ph-phone"></i></a>
+                <a href="https://wa.me/919687222006" target="_blank" aria-label="WhatsApp"><i
+                        class="ph-light ph-whatsapp-logo"></i></a>
+                <a href="https://maps.app.goo.gl/FqWvMCDPFEfyStgUA" target="_blank" aria-label="Location"><i
+                        class="ph-light ph-map-pin"></i></a>
+                <a href="https://www.facebook.com/hardcorefitnessamd/" target="_blank" aria-label="Facebook"><i
+                        class="ph-light ph-facebook-logo"></i></a>
+                <a href="https://www.instagram.com/hardcorefitnessahm/" target="_blank" aria-label="Instagram"><i
+                        class="ph-light ph-instagram-logo"></i></a>
             </div>
         </div>
     </div>
@@ -42,44 +69,47 @@
                 </div>
             </a>
             <div class="nav-links">
-                <a href="#philosophy">Philosophy</a>
                 <a href="#programs">Programs</a>
                 <div class="has-mega-menu">
-                    <a href="#facility">Facility <ion-icon name="chevron-down-outline"></ion-icon></a>
+                    <a href="#facility">Facility <i class="ph-light ph-caret-down"></i></a>
                     <!-- Mega Menu -->
                     <div class="mega-menu">
                         <div class="mega-grid">
                             <div class="mega-col">
                                 <h4 class="mega-title">Zones</h4>
                                 <ul class="mega-list">
-                                    <li><a href="#"><ion-icon name="barbell-outline"></ion-icon> The Iron Floor</a></li>
-                                    <li><a href="#"><ion-icon name="bicycle-outline"></ion-icon> Cardio Deck</a></li>
-                                    <li><a href="#"><ion-icon name="water-outline"></ion-icon> Recovery Spa</a></li>
+                                    <li><a href="#facility" class="mega-slide-link" data-slide="1"><i
+                                                class="ph-light ph-barbell"></i> The Iron Floor</a></li>
+                                    <li><a href="#facility" class="mega-slide-link" data-slide="2"><i
+                                                class="ph-light ph-bicycle"></i> Cardio Deck</a></li>
                                 </ul>
                             </div>
                             <div class="mega-col">
                                 <h4 class="mega-title">Amenities</h4>
                                 <ul class="mega-list">
-                                    <li><a href="#"><ion-icon name="key-outline"></ion-icon> Locker Rooms</a></li>
-                                    <li><a href="#"><ion-icon name="shirt-outline"></ion-icon> Towel Service</a></li>
-                                    <li><a href="#"><ion-icon name="cart-outline"></ion-icon> Pro Shop</a></li>
+                                    <li><a href="#facility" class="mega-slide-link" data-slide="0"><i
+                                                class="ph-light ph-key"></i> Changing Rooms</a></li>
+                                    <li><a href="#facility" class="mega-slide-link" data-slide="3"><i
+                                                class="ph-light ph-activity"></i> Studio</a></li>
+                                    <li><a href="#facility" class="mega-slide-link" data-slide="4"><i
+                                                class="ph-light ph-coffee"></i> Canteen</a></li>
                                 </ul>
                             </div>
                             <div class="mega-image">
                                 <div class="image-overlay">
                                     <h3>Take a Tour</h3>
-                                    <p>Explore our state-of-the-art facility</p>
-                                    <a href="#" class="btn-outline mega-btn" style="text-decoration:none;">View
+                                    <p>Visit The Hardcore Today.</p>
+                                    <a href="#facility" class="btn-outline mega-btn" style="text-decoration:none;">View
                                         Gallery</a>
                                 </div>
-                                <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=600&auto=format&fit=crop"
-                                    alt="Facility">
+                                <img src="1.png" alt="Facility">
                             </div>
                         </div>
                     </div>
                 </div>
                 <a href="#trainers">Trainers</a>
                 <a href="#membership">Membership</a>
+                <a href="#testimonials">Reviews</a>
             </div>
             <button class="btn-primary btn-small magnetic desktop-only trigger-modal">Enquiry</button>
             <div class="hamburger" id="hamburger">
@@ -90,22 +120,84 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobile-menu">
-        <button id="close-mobile-menu" class="close-mobile-btn"><ion-icon name="close-outline"></ion-icon></button>
-        <a href="#philosophy" class="mobile-link">Philosophy</a>
-        <a href="#programs" class="mobile-link">Programs</a>
-        <a href="#facility" class="mobile-link">Facility</a>
-        <a href="#trainers" class="mobile-link">Trainers</a>
-        <a href="#membership" class="mobile-link">Membership</a>
-        <button class="btn-primary btn-small trigger-modal w-100"
-            style="max-width: 200px; margin-top: 1rem;">Enquiry</button>
+    <!-- Creative Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu"
+        style="background: var(--color-dark-gray); color: var(--color-white); justify-content: flex-start; padding: 3rem 2rem;">
+        <!-- Glowing Accent -->
+        <div
+            style="position: absolute; top: -10%; right: -20%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,179,0,0.15) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 0;">
+        </div>
+
+        <!-- Header -->
+        <div
+            style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; position: relative; z-index: 1;">
+            <a href="#" class="logo" style="gap: 0.5rem;">
+                <img src="logo.png" alt="Hardcore Fitness"
+                    style="max-height: 40px; filter: drop-shadow(0 0 10px rgba(255,179,0,0.4));">
+                <div class="logo-text" style="color: var(--color-white);">
+                    <span class="brand-hardcore"
+                        style="color: var(--color-white); font-size: 1.2rem; text-shadow: none;">HARDCORE</span>
+                    <span class="brand-fitness" style="font-size: 0.6rem;">FITNESS</span>
+                </div>
+            </a>
+            <button id="close-mobile-menu" class="close-mobile-btn"
+                style="position: relative; top: 0; right: 0; color: var(--color-white); background: rgba(255,255,255,0.05); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: background 0.3s ease;"
+                onmouseover="this.style.background='var(--color-yellow)'; this.style.color='var(--color-black)';"
+                onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='var(--color-white)';"><i
+                    class="ph-light ph-x"></i></button>
+        </div>
+
+        <!-- Navigation Links -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%; position: relative; z-index: 1;">
+            <a href="#programs" class="mobile-link"
+                style="color: var(--color-white); font-size: 2rem; font-weight: 800; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; transition: all 0.3s ease; letter-spacing: -1px;"
+                onmouseover="this.style.color='var(--color-yellow)'; this.style.paddingLeft='10px';"
+                onmouseout="this.style.color='var(--color-white)'; this.style.paddingLeft='0';">Programs</a>
+            <a href="#facility" class="mobile-link"
+                style="color: var(--color-white); font-size: 2rem; font-weight: 800; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; transition: all 0.3s ease; letter-spacing: -1px;"
+                onmouseover="this.style.color='var(--color-yellow)'; this.style.paddingLeft='10px';"
+                onmouseout="this.style.color='var(--color-white)'; this.style.paddingLeft='0';">Facility</a>
+            <a href="#trainers" class="mobile-link"
+                style="color: var(--color-white); font-size: 2rem; font-weight: 800; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; transition: all 0.3s ease; letter-spacing: -1px;"
+                onmouseover="this.style.color='var(--color-yellow)'; this.style.paddingLeft='10px';"
+                onmouseout="this.style.color='var(--color-white)'; this.style.paddingLeft='0';">Trainers</a>
+            <a href="#membership" class="mobile-link"
+                style="color: var(--color-white); font-size: 2rem; font-weight: 800; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; transition: all 0.3s ease; letter-spacing: -1px;"
+                onmouseover="this.style.color='var(--color-yellow)'; this.style.paddingLeft='10px';"
+                onmouseout="this.style.color='var(--color-white)'; this.style.paddingLeft='0';">Membership</a>
+            <a href="#testimonials" class="mobile-link"
+                style="color: var(--color-white); font-size: 2rem; font-weight: 800; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; transition: all 0.3s ease; letter-spacing: -1px;"
+                onmouseover="this.style.color='var(--color-yellow)'; this.style.paddingLeft='10px';"
+                onmouseout="this.style.color='var(--color-white)'; this.style.paddingLeft='0';">Reviews</a>
+        </div>
+
+        <!-- Footer / CTA -->
+        <div
+            style="margin-top: auto; width: 100%; position: relative; z-index: 1; display: flex; flex-direction: column; gap: 2rem;">
+            <button class="btn-primary trigger-modal w-100"
+                style="padding: 1.2rem; font-size: 1.1rem; border-radius: 8px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 10px 20px rgba(255,179,0,0.2);">Make
+                an Enquiry</button>
+            <div style="display: flex; gap: 2rem; justify-content: center;">
+                <a href="https://wa.me/919687222006"
+                    style="color: rgba(255,255,255,0.6); font-size: 1.8rem; transition: color 0.3s ease;"
+                    onmouseover="this.style.color='var(--color-yellow)';"
+                    onmouseout="this.style.color='rgba(255,255,255,0.6)';"><i class="ph-light ph-whatsapp-logo"></i></a>
+                <a href="https://www.instagram.com/hardcorefitnessahm/"
+                    style="color: rgba(255,255,255,0.6); font-size: 1.8rem; transition: color 0.3s ease;"
+                    onmouseover="this.style.color='var(--color-yellow)';"
+                    onmouseout="this.style.color='rgba(255,255,255,0.6)';"><i class="ph-light ph-instagram-logo"></i></a>
+                <a href="https://www.facebook.com/hardcorefitnessamd/"
+                    style="color: rgba(255,255,255,0.6); font-size: 1.8rem; transition: color 0.3s ease;"
+                    onmouseover="this.style.color='var(--color-yellow)';"
+                    onmouseout="this.style.color='rgba(255,255,255,0.6)';"><i class="ph-light ph-facebook-logo"></i></a>
+            </div>
+        </div>
     </div>
 
     <!-- Modal Booking Overlay -->
     <div class="modal-overlay" id="booking-modal">
         <div class="modal-card">
-            <button class="close-modal"><ion-icon name="close-outline"></ion-icon></button>
+            <button class="close-modal"><i class="ph-light ph-x"></i></button>
             <h2>Make an Enquiry</h2>
             <p>Send your details directly to our WhatsApp.</p>
             <form class="booking-form" id="enquiry-form">
@@ -120,10 +212,6 @@
                         <input type="tel" id="eq-contact" required placeholder="00000 00000" maxlength="10"
                             pattern="[0-9]{10}">
                     </div>
-                </div>
-                <div class="input-group">
-                    <label>Date of Birth</label>
-                    <input type="date" id="eq-dob" required>
                 </div>
                 <button type="submit" class="btn-primary w-100 magnetic">Submit to WhatsApp</button>
             </form>
@@ -151,11 +239,8 @@
                 </div>
             </div>
             <div class="hero-image fade-up delay-4">
-                <div class="hero-accent-shape"></div>
                 <div class="image-frame">
-                    <!-- Using the image you provided. Place the actual file in your project folder and update the src if needed. -->
-                    <img src="reception-hero.jpg" alt="Hardcore Fitness Reception"
-                        onerror="this.src='https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop'">
+                    <img id="hero-carousel" src="1.png" alt="Gym showcase">
                 </div>
             </div>
         </header>
@@ -233,7 +318,7 @@
             style="position: sticky; top: 75px; height: calc(100vh - 75px); width: 100vw; overflow: hidden; background: transparent; display: flex; flex-direction: column; justify-content: center;">
 
             <!-- Background Video -->
-            <video class="hero-video-bg" autoplay muted loop playsinline style="opacity: 0.2;">
+            <video class="hero-video-bg" autoplay muted loop playsinline style="opacity: 0.05;">
                 <source src="v.mp4" type="video/mp4">
             </video>
 
@@ -243,29 +328,21 @@
                 <!-- Creative Intro Card -->
                 <div class="program-intro-card fade-up">
                     <div class="intro-glass-panel">
-                        <button class="btn-minimal trigger-modal">
-                            Start Journey <ion-icon name="arrow-forward-outline"></ion-icon>
-                        </button>
-
                         <div class="glass-decoration"></div>
                         <div class="glass-content">
-                            <div class="label-pill">
-                                <ion-icon name="flash"></ion-icon> What We Offer
-                            </div>
+
                             <h2 class="massive-stacked-title">
-                                <span class="layer-1">OUR</span>
-                                <span class="layer-2">TRAINING</span>
-                                <span class="layer-3">PROGRAMS.</span>
+                                <span class="layer-1">BUILD</span>
+                                <span class="layer-2">YOUR</span>
+                                <span class="layer-3">LEGACY.</span>
                             </h2>
                             <p class="premium-desc">A curated collection of elite classes engineered for total physical
                                 progression. Discover your potential.</p>
 
-                            <div class="intro-footer-actions">
-                                <div class="swipe-hint desktop-only">
-                                    <span>Scroll</span>
-                                    <div class="swipe-arrow"><ion-icon name="arrow-forward"></ion-icon></div>
-                                </div>
-                            </div>
+                            <button class="btn-minimal trigger-modal">
+                                Start Journey <i class="ph-light ph-arrow-right"></i>
+                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -273,11 +350,11 @@
                 <!-- Card 1 -->
                 <div class="program-card h-program-card fade-up delay-1">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=800&auto=format&fit=crop');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">01</div>
-                        <div class="program-icon"><ion-icon name="flame-outline"></ion-icon></div>
+                        <div class="program-icon"><i class="ph-light ph-activity"></i></div>
                         <h3 class="program-name">HIIT Training</h3>
                         <p class="program-desc">Maximum calorie burn and cardio strength in minimum time with high
                             intensity intervals.</p>
@@ -288,11 +365,11 @@
                 <!-- Card 2 -->
                 <div class="program-card h-program-card fade-up delay-1">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">02</div>
-                        <div class="program-icon"><ion-icon name="barbell-outline"></ion-icon></div>
+                        <div class="program-icon"><i class="ph-light ph-hand-fist"></i></div>
                         <h3 class="program-name">Weight Training</h3>
                         <p class="program-desc">State-of-the-art equipment for strength, bodybuilding, and body
                             recomposition.</p>
@@ -303,11 +380,11 @@
                 <!-- Card 3 -->
                 <div class="program-card h-program-card fade-up delay-2">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">03</div>
-                        <div class="program-icon"><ion-icon name="body-outline"></ion-icon></div>
+                        <div class="program-icon"><i class="ph-light ph-flower-lotus"></i></div>
                         <h3 class="program-name">Yoga Classes</h3>
                         <p class="program-desc">Certified yoga instructors for flexibility, mindfulness, and recovery at
                             all levels.</p>
@@ -318,11 +395,11 @@
                 <!-- Card 4 -->
                 <div class="program-card h-program-card fade-up delay-2">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">04</div>
-                        <div class="program-icon"><ion-icon name="musical-notes-outline"></ion-icon></div>
+                        <div class="program-icon"><i class="ph-light ph-speaker-hifi"></i></div>
                         <h3 class="program-name">Zumba & Dance</h3>
                         <p class="program-desc">High-energy dance fitness that feels like a party. Burn calories while
                             having fun!</p>
@@ -333,11 +410,11 @@
                 <!-- Card 5 -->
                 <div class="program-card h-program-card fade-up delay-3">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?q=80&w=800&auto=format&fit=crop');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">05</div>
-                        <div class="program-icon"><ion-icon name="bicycle-outline"></ion-icon></div>
+                        <div class="program-icon"><i class="ph-light ph-person-simple-bike"></i></div>
                         <h3 class="program-name">Cycling</h3>
                         <p class="program-desc">Indoor cycling to build stamina, leg strength, and cardiovascular
                             endurance.</p>
@@ -348,15 +425,15 @@
                 <!-- Card 6 -->
                 <div class="program-card h-program-card fade-up delay-3">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">06</div>
-                        <div class="program-icon"><ion-icon name="person-outline"></ion-icon></div>
+                        <div class="program-icon"><i class="ph-light ph-users-three"></i></div>
                         <h3 class="program-name">Personal Training</h3>
                         <p class="program-desc">1-on-1 sessions with certified trainers including dedicated women's
                             personal trainers.</p>
-                        <div class="program-tag women-tag"><ion-icon name="woman-outline"></ion-icon> Women's Trainers
+                        <div class="program-tag women-tag"><i class="ph-light ph-woman"></i> Women's Trainers
                             Available</div>
                     </div>
                 </div>
@@ -364,11 +441,11 @@
                 <!-- Card 7 -->
                 <div class="program-card h-program-card fade-up delay-1">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=800&auto=format&fit=crop');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">07</div>
-                        <div class="program-icon"><ion-icon name="restaurant-outline"></ion-icon></div>
+                        <div class="program-icon"><i class="ph-light ph-carrot"></i></div>
                         <h3 class="program-name">Nutrition Consulting</h3>
                         <p class="program-desc">Personalized diet plans and nutrition advice to complement your training
                             goals.</p>
@@ -379,11 +456,11 @@
                 <!-- Card 8 -->
                 <div class="program-card h-program-card fade-up delay-2">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=800&auto=format&fit=crop');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">08</div>
-                        <div class="program-icon"><ion-icon name="flash-outline"></ion-icon></div>
+                        <div class="program-icon"><i class="ph-light ph-lightning"></i></div>
                         <h3 class="program-name">CrossFit</h3>
                         <p class="program-desc">Functional fitness combining gymnastics, weightlifting, and cardio for
                             total fitness.</p>
@@ -394,11 +471,11 @@
                 <!-- Card 9 -->
                 <div class="program-card h-program-card fade-up delay-3">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1515523110800-9415d13b84a8?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1526232761682-d26e03ac148e?q=80&w=800&auto=format&fit=crop');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">09</div>
-                        <div class="program-icon"><ion-icon name="happy-outline"></ion-icon></div>
+                        <div class="program-icon"><i class="ph-light ph-basketball"></i></div>
                         <h3 class="program-name">Youth Sports</h3>
                         <p class="program-desc">Age-appropriate programs to develop strength and healthy habits in young
                             athletes.</p>
@@ -416,7 +493,16 @@
         <div class="sticky-container"
             style="position: sticky; top: 75px; height: calc(100vh - 75px); width: 100vw; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-left: calc(-50vw + 50%); background: var(--color-white);">
 
-            <!-- Minimalist Header -->
+            <!-- Creative Animated Background Elements -->
+            <div
+                style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 0; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                <!-- Floating gym icons -->
+                <i class="ph-light ph-dumbbell floating-icon icon-1"></i>
+                <i class="ph-light ph-barbell-weightlifting floating-icon icon-2"></i>
+                <i class="ph-light ph-running floating-icon icon-3"></i>
+                <i class="ph-light ph-yoga floating-icon icon-4"></i>
+                <i class="ph-light ph-bicycle floating-icon icon-5"></i>
+            </div> <!-- Minimalist Header -->
             <div style="position: absolute; top: 6%; left: 5%; z-index: 10; pointer-events: none;">
                 <h2
                     style="color: var(--color-black); font-size: 0.9rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;">
@@ -430,8 +516,9 @@
                 <div class="minimal-slider-slide active">
                     <div class="minimal-content">
                         <div class="minimal-text">
+                            <div class="slide-num">01</div>
                             <div class="text-wrap">
-                                <h3>Female Changing Room</h3>
+                                <h3>Changing Room</h3>
                                 <div
                                     style="width: 30px; height: 3px; background: var(--color-yellow); margin: 1.5rem 0;">
                                 </div>
@@ -440,8 +527,7 @@
                             </div>
                         </div>
                         <div class="minimal-image">
-                            <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1200&auto=format&fit=crop"
-                                alt="Female Changing Room">
+                            <img src="2.png" alt="Female Changing Room">
                         </div>
                     </div>
                 </div>
@@ -449,6 +535,7 @@
                 <div class="minimal-slider-slide">
                     <div class="minimal-content">
                         <div class="minimal-text">
+                            <div class="slide-num">02</div>
                             <div class="text-wrap">
                                 <h3>Workout Floor</h3>
                                 <div
@@ -459,8 +546,7 @@
                             </div>
                         </div>
                         <div class="minimal-image">
-                            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop"
-                                alt="Workout Floor">
+                            <img src="10.png" alt="Workout Floor">
                         </div>
                     </div>
                 </div>
@@ -468,94 +554,370 @@
                 <div class="minimal-slider-slide">
                     <div class="minimal-content">
                         <div class="minimal-text">
+                            <div class="slide-num">03</div>
                             <div class="text-wrap">
                                 <h3>Cardio Zone</h3>
                                 <div
                                     style="width: 30px; height: 3px; background: var(--color-yellow); margin: 1.5rem 0;">
                                 </div>
-                                <p>State-of-the-art treadmills, ellipticals, and bikes to maximize your endurance and
-                                    stamina.</p>
+                                <p>Heart-pumping treadmills, smooth ellipticals, and interactive bikes designed to
+                                    elevate your cardiovascular training</p>
                             </div>
                         </div>
                         <div class="minimal-image">
-                            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop"
-                                alt="Cardio">
+                            <img src="6.png" alt="Cardio">
                         </div>
                     </div>
                 </div>
+
+
+
+
+
+
+
+
                 <!-- Slide 4 -->
                 <div class="minimal-slider-slide">
                     <div class="minimal-content">
                         <div class="minimal-text">
+                            <div class="slide-num">04</div>
                             <div class="text-wrap">
-                                <h3>Front Desk</h3>
+                                <h3>Studio</h3>
                                 <div
                                     style="width: 30px; height: 3px; background: var(--color-yellow); margin: 1.5rem 0;">
                                 </div>
-                                <p>Welcome to Hardcore Fitness. Start your journey with our friendly and professional
-                                    staff.</p>
+                                <p>Step into our bright and airy studio, the perfect space for yoga, HIIT, and group
+                                    classes that inspire movement and energy</p>
                             </div>
                         </div>
                         <div class="minimal-image">
-                            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=1200&auto=format&fit=crop"
-                                alt="Reception">
+                            <img src="5.png" alt="Studio">
                         </div>
                     </div>
                 </div>
+
+
+
+
+
+
+
+                <!-- Slide 5 -->
+                <div class="minimal-slider-slide">
+                    <div class="minimal-content">
+                        <div class="minimal-text">
+                            <div class="slide-num">05</div>
+                            <div class="text-wrap">
+                                <h3>Gym Canteen</h3>
+                                <div
+                                    style="width: 30px; height: 3px; background: var(--color-yellow); margin: 1.5rem 0;">
+                                </div>
+                                <p>PFuel your workout with our on-site canteen offering healthy snacks, protein shakes,
+                                    and
+                                    refreshments to keep you energized throughout your fitness journey.
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="minimal-image">
+                            <img src="21.png" alt="Workout Floor">
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
             </div>
         </div>
     </section>
 
-    <!-- Expert Trainers Section (Horizontal Scroll Gallery) -->
-    <section id="trainers" style="height: 300vh; position: relative; padding: 0; background: var(--color-black);">
-        <div class="trainer-sticky"
-            style="position: sticky; top: 75px; height: calc(100vh - 75px); width: 100vw; overflow: hidden; background: var(--color-black); display: flex; flex-direction: column; justify-content: center;">
+    <!--/* -------------------------------------------------------------------
+   Membership Section – Creative Brush‑stroke (Sweat‑Streak) Background
+   ------------------------------------------------------------------- */
 
+/* Wrapper that sits behind the content */
+.membership-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Individual brush‑stroke elements */
+.sweat-streak {
+    position: absolute;
+    width: 220px;
+    height: 60px;
+    background: var(--color-yellow);
+    opacity: 0.15;
+    filter: blur(12px);
+    transform: rotate(20deg);
+    animation: streakMove 8s ease-in-out infinite alternate;
+}
+
+/* Position each streak – tweak as needed */
+.sweat-streak:nth-child(1) { top: 15%; left: 10%; transform: rotate(18deg); }
+.sweat-streak:nth-child(2) { top: 45%; left: 55%; transform: rotate(-12deg); }
+.sweat-streak:nth-child(3) { top: 75%; left: 30%; transform: rotate(22deg); }
+
+@keyframes streakMove {
+    0%   { transform: translateY(0) scale(1); opacity: 0.12; }
+    100% { transform: translateY(-20px) scale(1.08); opacity: 0.18; }
+}
+
+/* Ensure membership content stays on top */
+#membership { position: relative; z-index: 1; }
+
+    <!-- Expert Trainers Section (Horizontal Scroll Gallery) -->
+    <section id="trainers" style="height: 300vh; position: relative; padding: 0; background: var(--color-light-gray);">
+        <div class="trainer-sticky"
+            style="position: sticky; top: 75px; height: calc(100vh - 75px); width: 100vw; overflow: hidden; background: var(--color-light-gray); display: flex; flex-direction: column; justify-content: center;">
+
+            <!-- ===== IMMERSIVE BACKGROUND LAYER ===== -->
+            <div class="trainer-bg-layer" aria-hidden="true">
+
+                <!-- Background Video -->
+                <video class="trainer-bg-video" autoplay muted loop playsinline>
+                    <source src="vv.mp4" type="video/mp4">
+                </video>
+
+                <!-- Marquee Rows — horizontal scrolling text -->
+                <div class="tbg-marquee-row tbg-row-1">
+                    <div class="tbg-marquee-inner">
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                    </div>
+                </div>
+
+                <div class="tbg-marquee-row tbg-row-2">
+                    <div class="tbg-marquee-inner tbg-reverse">
+                        <span>EXPERT TRAINERS</span><span class="tbg-dot">✦</span>
+                        <span>EXPERT TRAINERS</span><span class="tbg-dot">✦</span>
+                        <span>EXPERT TRAINERS</span><span class="tbg-dot">✦</span>
+                        <span>EXPERT TRAINERS</span><span class="tbg-dot">✦</span>
+                        <span>EXPERT TRAINERS</span><span class="tbg-dot">✦</span>
+                        <span>EXPERT TRAINERS</span><span class="tbg-dot">✦</span>
+                        <span>EXPERT TRAINERS</span><span class="tbg-dot">✦</span>
+                        <span>EXPERT TRAINERS</span><span class="tbg-dot">✦</span>
+                    </div>
+                </div>
+
+                <div class="tbg-marquee-row tbg-row-3">
+                    <div class="tbg-marquee-inner">
+                        <span>HARDCORE</span><span class="tbg-dot">★</span>
+                        <span>FITNESS</span><span class="tbg-dot">★</span>
+                        <span>HARDCORE</span><span class="tbg-dot">★</span>
+                        <span>FITNESS</span><span class="tbg-dot">★</span>
+                        <span>HARDCORE</span><span class="tbg-dot">★</span>
+                        <span>FITNESS</span><span class="tbg-dot">★</span>
+                        <span>HARDCORE</span><span class="tbg-dot">★</span>
+                        <span>FITNESS</span><span class="tbg-dot">★</span>
+                        <span>HARDCORE</span><span class="tbg-dot">★</span>
+                        <span>FITNESS</span><span class="tbg-dot">★</span>
+                    </div>
+                </div>
+
+                <div class="tbg-marquee-row tbg-row-4">
+                    <div class="tbg-marquee-inner tbg-reverse">
+                        <span>PUSH YOUR LIMITS</span><span class="tbg-dot">◆</span>
+                        <span>PUSH YOUR LIMITS</span><span class="tbg-dot">◆</span>
+                        <span>PUSH YOUR LIMITS</span><span class="tbg-dot">◆</span>
+                        <span>PUSH YOUR LIMITS</span><span class="tbg-dot">◆</span>
+                        <span>PUSH YOUR LIMITS</span><span class="tbg-dot">◆</span>
+                        <span>PUSH YOUR LIMITS</span><span class="tbg-dot">◆</span>
+                    </div>
+                </div>
+
+                <div class="tbg-marquee-row tbg-row-5">
+                    <div class="tbg-marquee-inner">
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                        <span>HARDCORE FITNESS</span><span class="tbg-dot">·</span>
+                    </div>
+                </div>
+
+                <!-- Vertical / diagonal text strips -->
+                <div class="tbg-vertical-text tbg-vert-1">HARDCORE FITNESS</div>
+                <div class="tbg-vertical-text tbg-vert-2">HARDCORE FITNESS</div>
+                <div class="tbg-vertical-text tbg-vert-3">HARDCORE FITNESS</div>
+                <div class="tbg-vertical-text tbg-vert-4">HARDCORE FITNESS</div>
+
+                <!-- Scattered floating text blobs -->
+                <span class="tbg-float-text tbg-ft-1">Hardcore</span>
+                <span class="tbg-float-text tbg-ft-2">FITNESS</span>
+                <span class="tbg-float-text tbg-ft-3">hardcore</span>
+                <span class="tbg-float-text tbg-ft-4">FIT</span>
+                <span class="tbg-float-text tbg-ft-5">HARDCORE FITNESS</span>
+                <span class="tbg-float-text tbg-ft-6">hardcore</span>
+                <span class="tbg-float-text tbg-ft-7">FITNESS</span>
+                <span class="tbg-float-text tbg-ft-8">HARDCORE</span>
+
+                <!-- Floating small images -->
+                <img class="tbg-float-img tbg-img-1"
+                    src="https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=200&auto=format&fit=crop"
+                    alt="">
+                <img class="tbg-float-img tbg-img-2"
+                    src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=200&auto=format&fit=crop"
+                    alt="">
+                <img class="tbg-float-img tbg-img-3"
+                    src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=200&auto=format&fit=crop"
+                    alt="">
+                <img class="tbg-float-img tbg-img-4"
+                    src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=200&auto=format&fit=crop"
+                    alt="">
+                <img class="tbg-float-img tbg-img-5"
+                    src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=200&auto=format&fit=crop"
+                    alt="">
+                <img class="tbg-float-img tbg-img-6"
+                    src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=200&auto=format&fit=crop"
+                    alt="">
+
+                <!-- Floating small video clips -->
+                <video class="tbg-float-vid tbg-vid-1" autoplay muted loop playsinline>
+                    <source src="v.mp4" type="video/mp4">
+                </video>
+                <video class="tbg-float-vid tbg-vid-2" autoplay muted loop playsinline>
+                    <source src="v.mp4" type="video/mp4">
+                </video>
+
+            </div>
+            <!-- ===== END BACKGROUND LAYER ===== -->
 
             <div class="trainer-track" id="trainer-scroll-track"
-                style="display: flex; width: max-content; height: 75vh; align-items: center; padding: 0 10vw; gap: 8vw; will-change: transform;">
+                style="display: flex; width: max-content; height: 75vh; align-items: center; padding: 0 10vw; gap: 8vw; will-change: transform; position: relative; z-index: 10;">
 
                 <!-- Intro Title -->
                 <div class="trainer-intro-card" style="width: 40vw; max-width: 500px; flex-shrink: 0;">
-                    <h2 class="creative-intro-title">Expert<br><span class="elite-text">Trainers.</span></h2>
-                    <p style="color: #888; font-size: 1.1rem; line-height: 1.6;">Push your limits with guidance from our
+                    <h2 class="creative-intro-title"><span class="expert-text">Expert</span><span
+                            class="elite-text">Trainers.</span></h2>
+                    <p style="color: var(--color-black); font-size: 1.15rem; line-height: 1.7; font-weight: 600;">Push
+                        your limits with guidance from our
                         certified, world-class fitness professionals. Scroll to view.</p>
-                    <div class="women-trainer-badge"><ion-icon name="woman-outline"></ion-icon> Dedicated Women's
-                        Trainers on Staff</div>
+                    <div class=""></div>
                 </div>
 
                 <!-- Trainer 1 -->
                 <div class="horizontal-trainer-card">
-                    <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=800&auto=format&fit=crop"
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop"
                         alt="Trainer Alex">
                     <div class="h-trainer-info">
                         <h3>Alex Carter</h3>
-                        <p class="specialty">Strength & Conditioning</p>
-                        <p class="bio">10+ years helping athletes build raw power and muscle safely.</p>
+                        <p class="specialty">Beginner</p>
+                        <p class="bio" style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--color-gray);">Start
+                            your fitness journey with personalized basics and form correction.</p>
+                        <div class="minimal-downloads"
+                            style="display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0; gap: 1rem;">
+                            <a href="1.pdf" download
+                                style="flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: var(--color-white); border-radius: 8px; text-decoration: none; color: var(--color-black); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+                                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.08)';"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.04)';">
+                                <div
+                                    style="background: var(--color-yellow); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-black);">
+                                    <i class="ph-light ph-carrot" style="font-size: 1.2rem;"></i>
+                                </div>
+                                Diet PDF
+                            </a>
+                            <a href="1.pdf" download
+                                style="flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: var(--color-white); border-radius: 8px; text-decoration: none; color: var(--color-black); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+                                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.08)';"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.04)';">
+                                <div
+                                    style="background: var(--color-yellow); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-black);">
+                                    <i class="ph-light ph-barbell" style="font-size: 1.2rem;"></i>
+                                </div>
+                                Workout PDF
+                            </a>
+                        </div>
                         <button class="btn-outline w-100 trigger-modal">Book Session</button>
                     </div>
                 </div>
 
                 <!-- Trainer 2 -->
                 <div class="horizontal-trainer-card">
-                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=800&auto=format&fit=crop"
+                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop"
                         alt="Trainer Sarah">
                     <div class="h-trainer-info">
                         <h3>Sarah Jenkins</h3>
-                        <p class="specialty">HIIT & Cardio</p>
-                        <p class="bio">High energy coach dedicated to melting fat and building elite endurance.</p>
+                        <p class="specialty">Intermediate</p>
+                        <p class="bio" style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--color-gray);">Push
+                            your limits with high-intensity endurance and dynamic strength building.</p>
+                        <div class="minimal-downloads"
+                            style="display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0; gap: 1rem;">
+                            <a href="1.pdf" download
+                                style="flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: var(--color-white); border-radius: 8px; text-decoration: none; color: var(--color-black); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+                                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.08)';"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.04)';">
+                                <div
+                                    style="background: var(--color-yellow); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-black);">
+                                    <i class="ph-light ph-carrot" style="font-size: 1.2rem;"></i>
+                                </div>
+                                Diet PDF
+                            </a>
+                            <a href="1.pdf" download
+                                style="flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: var(--color-white); border-radius: 8px; text-decoration: none; color: var(--color-black); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+                                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.08)';"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.04)';">
+                                <div
+                                    style="background: var(--color-yellow); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-black);">
+                                    <i class="ph-light ph-barbell" style="font-size: 1.2rem;"></i>
+                                </div>
+                                Workout PDF
+                            </a>
+                        </div>
                         <button class="btn-outline w-100 trigger-modal">Book Session</button>
                     </div>
                 </div>
 
                 <!-- Trainer 3 -->
                 <div class="horizontal-trainer-card">
-                    <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=800&auto=format&fit=crop"
+                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=800&auto=format&fit=crop"
                         alt="Trainer Mike">
                     <div class="h-trainer-info">
                         <h3>Mike Davis</h3>
-                        <p class="specialty">Mobility & Recovery</p>
-                        <p class="bio">Expert in injury prevention, flexibility, and solid core stability.</p>
+                        <p class="specialty">Advanced</p>
+                        <p class="bio" style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--color-gray);">Master
+                            elite lifting techniques, heavy conditioning, and peak performance.</p>
+                        <div class="minimal-downloads"
+                            style="display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0; gap: 1rem;">
+                            <a href="1.pdf" download
+                                style="flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: var(--color-white); border-radius: 8px; text-decoration: none; color: var(--color-black); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+                                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.08)';"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.04)';">
+                                <div
+                                    style="background: var(--color-yellow); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-black);">
+                                    <i class="ph-light ph-carrot" style="font-size: 1.2rem;"></i>
+                                </div>
+                                Diet PDF
+                            </a>
+                            <a href="1.pdf" download
+                                style="flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: var(--color-white); border-radius: 8px; text-decoration: none; color: var(--color-black); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+                                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.08)';"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.04)';">
+                                <div
+                                    style="background: var(--color-yellow); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-black);">
+                                    <i class="ph-light ph-barbell" style="font-size: 1.2rem;"></i>
+                                </div>
+                                Workout PDF
+                            </a>
+                        </div>
                         <button class="btn-outline w-100 trigger-modal">Book Session</button>
                     </div>
                 </div>
@@ -563,8 +925,14 @@
         </div>
     </section>
 
-    <!-- Parallax Divider 2 -->
-    <div class="parallax-divider parallax-2"></div>
+    <!-- Creative Parallax Divider 2 -->
+    <div class="parallax-divider parallax-2"
+        style="position: relative; height: 35vh; min-height: 250px; display: flex; align-items: center; justify-content: center; background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600&auto=format&fit=crop'); background-attachment: fixed; background-size: cover; background-position: center; overflow: hidden;">
+        <!-- Gradient Overlay -->
+        <div
+            style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%); z-index: 1;">
+        </div>
+    </div>
 
     <!-- ====== STACKING PANELS START ====== -->
     <div class="stacking-wrapper">
@@ -637,9 +1005,222 @@
             </section>
         </div>
 
+        <!-- PANEL 1.5: Testimonials -->
+        <div class="stack-panel" id="stack-panel-testi"
+            style="z-index: 2; background: var(--color-black); color: var(--color-white);">
+            <section id="testimonials"
+                style="padding: clamp(4rem, 8vw, 8rem) 0; position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center;">
+
+                <!-- Creative Background Elements -->
+                <div
+                    style="position: absolute; top: -5%; left: -2%; font-size: clamp(15rem, 30vw, 30rem); color: rgba(255, 255, 255, 0.02); font-family: serif; line-height: 1; pointer-events: none;">
+                    &ldquo;</div>
+                <div
+                    style="position: absolute; bottom: 5%; right: 2%; font-size: clamp(10rem, 20vw, 20rem); color: rgba(255, 179, 0, 0.03); font-family: serif; line-height: 1; pointer-events: none;">
+                    &rdquo;</div>
+
+                <div class="container">
+                    <div class="testi-creative-grid">
+
+                        <!-- Left Info Column -->
+                        <div class="testi-header-col fade-up">
+                            <span class="testi-subtitle">Community Feedback</span>
+                            <h2
+                                style="color: var(--color-white); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem;">
+                                Real <span style="color: var(--color-yellow);">Results.</span>
+                            </h2>
+                            <p
+                                style="color: #a0a0a0; font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.7; margin-bottom: 2.5rem; max-width: 400px;">
+                                Don't just take our word for it. Hear from the dedicated athletes who transformed their
+                                bodies and minds at Hardcore Fitness.
+                            </p>
+                            <a href="https://www.google.com/search?q=hardcore+fitness+reviews&oq=hardcore+&gs_lcrp=EgZjaHJvbWUqDAgBECMYJxiABBiKBTIGCAAQRRg5MgwIARAjGCcYgAQYigUyDAgCEAAYQxiABBiKBTIMCAMQABhDGIAEGIoFMhUIBBAuGEMYrwEYxwEYugIYgAQYigUyDAgFEC4YQxiABBiKBTIKCAYQABixAxiABDIGCAcQRRg8MgYICBBFGD0yCggJEC4YsQMYgAQyBwgKEAAYgAQyBwgLEAAYgAQyCggMEC4YgAQY5QQyBwgNEAAYgAQyBwgOEAAYgATSAQg0NTg3ajBqN6gCFLACAfEFPqXWlTBOIgQ&client=ms-android-vivo-terr1-rso2&sourceid=chrome-mobile&ie=UTF-8#ebo=1"
+                                target="_blank" class="btn-outline btn-small magnetic"
+                                style="border-color: rgba(255,255,255,0.2); color: #fff; margin-bottom: 2rem; display: inline-flex;"><i
+                                    class="ph-light ph-google-logo" style="margin-right: 8px;"></i> Write a Review</a>
+
+                            <div class="testi-controls-creative desktop-only-flex">
+                                <button class="testi-prev-c"><i class="ph-light ph-arrow-left"></i></button>
+                                <button class="testi-next-c"><i class="ph-light ph-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Right Slider Column -->
+                        <div class="testi-slider-col fade-up delay-1">
+                            <div class="testi-slider-wrap">
+                                <div class="testi-slider" id="testi-slider">
+
+                                    <!-- Feedback 1 -->
+                                    <div class="testi-slide active">
+                                        <div class="testi-card-creative">
+                                            <div class="testi-stars-c">
+                                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i>
+                                            </div>
+                                            <p class="testi-text-c">"One of the Best Gym in Naroda area. The equipments,
+                                                trainers, environment everything is top notch, one can definitely
+                                                consider Hardcode to start you fitness journey 💪"</p>
+                                            <div class="testi-author-c">
+                                                <div class="testi-avatar-c">AH</div>
+                                                <div class="testi-info-c">
+                                                    <h4>AKASH HINDUJA</h4>
+                                                    <span>9 reviews · 2 months ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Feedback 2 -->
+                                    <div class="testi-slide">
+                                        <div class="testi-card-creative">
+                                            <div class="testi-stars-c">
+                                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i>
+                                            </div>
+                                            <p class="testi-text-c">"Best gym equipments and best gym staff. Gym is
+                                                maintained well and environment is also good. Great place for a focused
+                                                workout."</p>
+                                            <div class="testi-author-c">
+                                                <div class="testi-avatar-c">SV</div>
+                                                <div class="testi-info-c">
+                                                    <h4>shree varad</h4>
+                                                    <span>10 reviews · 7 months ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Feedback 3 -->
+                                    <div class="testi-slide">
+                                        <div class="testi-card-creative">
+                                            <div class="testi-stars-c">
+                                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i>
+                                            </div>
+                                            <p class="testi-text-c">"Gym has all equipments you need for workout, staff
+                                                behaviour is nice, they have central air conditioning system and place
+                                                is also quite large. Also have canteen and place for steam bath."</p>
+                                            <div class="testi-author-c">
+                                                <div class="testi-avatar-c">VZ</div>
+                                                <div class="testi-info-c">
+                                                    <h4>VIJAYSINH ZALA</h4>
+                                                    <span>Local Guide · 51 reviews · 7 years ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Feedback 4 -->
+                                    <div class="testi-slide">
+                                        <div class="testi-card-creative">
+                                            <div class="testi-stars-c">
+                                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i>
+                                            </div>
+                                            <p class="testi-text-c">"I m into fitness since decade and working out
+                                                everyday is my habit, they charge bit higher than the other gyms but
+                                                they justify it. Awesome gym with good hygiene, all equipments are
+                                                modern and the best thing is the gym has a great vibe."</p>
+                                            <div class="testi-author-c">
+                                                <div class="testi-avatar-c">MC</div>
+                                                <div class="testi-info-c">
+                                                    <h4>Mahesh Chandiramani</h4>
+                                                    <span>4 reviews · 4 years ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Feedback 5 -->
+                                    <div class="testi-slide">
+                                        <div class="testi-card-creative">
+                                            <div class="testi-stars-c">
+                                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i>
+                                            </div>
+                                            <p class="testi-text-c">"I'm a Gym Member of Hardcore Fitness.. and i giving
+                                                5 Stars .. for Excellent Services they maintain. each 10-15 days i'm
+                                                getting Calls for Feedback / Service related. Which is extremely
+                                                important."</p>
+                                            <div class="testi-author-c">
+                                                <div class="testi-avatar-c">SK</div>
+                                                <div class="testi-info-c">
+                                                    <h4>Sumit Kasardekar</h4>
+                                                    <span>Local Guide · 31 reviews · 6 years ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Feedback 6 -->
+                                    <div class="testi-slide">
+                                        <div class="testi-card-creative">
+                                            <div class="testi-stars-c">
+                                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i>
+                                            </div>
+                                            <p class="testi-text-c">"Amazing experience! The trainers are super
+                                                supportive and the gym is incredibly clean. Highly recommend joining if
+                                                you are serious about your fitness goals."</p>
+                                            <div class="testi-author-c">
+                                                <div class="testi-avatar-c">NS</div>
+                                                <div class="testi-info-c">
+                                                    <h4>Neha Sharma</h4>
+                                                    <span>2 reviews · 1 month ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Feedback 7 -->
+                                    <div class="testi-slide">
+                                        <div class="testi-card-creative">
+                                            <div class="testi-stars-c">
+                                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i>
+                                            </div>
+                                            <p class="testi-text-c">"Spacious and well-maintained. The equipment is
+                                                state of the art and the vibe is totally unmatched. Best gym in town!
+                                                Would definitely recommend to everyone."</p>
+                                            <div class="testi-author-c">
+                                                <div class="testi-avatar-c">RP</div>
+                                                <div class="testi-info-c">
+                                                    <h4>Rahul Patel</h4>
+                                                    <span>15 reviews · 3 months ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="testi-mobile-controls mobile-only-flex">
+                                    <div class="testi-controls-creative">
+                                        <button class="testi-prev-c"><i class="ph-light ph-arrow-left"></i></button>
+                                        <button class="testi-next-c"><i class="ph-light ph-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                                <div class="testi-dots-c"></div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+
         <!-- PANEL 2: Membership (slides over Health Metrics) -->
-        <div class="stack-panel" id="stack-panel-1" style="z-index: 2; background: #fafafa;">
-            <section id="membership" style="padding: 5rem 0;">
+        <div class="stack-panel" id="stack-panel-1" style="z-index: 3; background: #fafafa;">
+            <section id="membership" style="padding: 5rem 0; position: relative;">
+                <div class="membership-bg"></div>
                 <div class="container">
 
                     <!-- Header Row -->
@@ -656,8 +1237,9 @@
                             style="max-width:320px; color:var(--color-gray); font-size:0.95rem; line-height:1.6; align-self:flex-end;">
                             Simple, transparent pricing. No hidden fees. Pick your plan and start today.
                             <span
-                                style="display:block; margin-top:0.8rem; color:var(--color-black); font-weight:600; font-size:0.85rem; letter-spacing:1px;">
-                                🕐 Open: 6:00 AM – 11:00 PM, All Days
+                                style="display:block; margin-top:0.8rem; color:var(--color-black); font-weight:600; font-size:0.85rem; letter-spacing:1px; line-height: 1.5;">
+                                🕐 Mon-Sat: 5:30 AM – 11:00 PM<br>
+                                🕐 Sun: 6:00 AM – 11:00 AM
                             </span>
                         </p>
                     </div>
@@ -672,8 +1254,8 @@
                         <div class="mem-plan">
                             <div class="mem-plan-bar"></div>
                             <p class="mem-duration">01 Month</p>
-                            <p class="mem-price">₹3,499</p>
-                            <p class="mem-original">₹4,000</p>
+                            <p class="mem-price">₹<span class="price-counter" data-final="4000"
+                                    data-start="7500">4,000</span></p>
                             <button class="mem-btn trigger-modal">Join</button>
                         </div>
 
@@ -683,8 +1265,8 @@
                         <div class="mem-plan">
                             <div class="mem-plan-bar"></div>
                             <p class="mem-duration">03 Months</p>
-                            <p class="mem-price">₹5,999</p>
-                            <p class="mem-original">₹6,500</p>
+                            <p class="mem-price">₹<span class="price-counter" data-final="6500"
+                                    data-start="12000">6,500</span></p>
                             <button class="mem-btn trigger-modal">Join</button>
                         </div>
 
@@ -694,8 +1276,8 @@
                         <div class="mem-plan">
                             <div class="mem-plan-bar"></div>
                             <p class="mem-duration">06 Months</p>
-                            <p class="mem-price">₹6,999</p>
-                            <p class="mem-original">₹7,500</p>
+                            <p class="mem-price">₹<span class="price-counter" data-final="7500"
+                                    data-start="14000">7,500</span></p>
                             <button class="mem-btn trigger-modal">Join</button>
                         </div>
 
@@ -705,8 +1287,8 @@
                         <div class="mem-plan mem-plan--featured">
                             <div class="mem-plan-bar" style="background: var(--color-black);"></div>
                             <p class="mem-duration">12 Months <span class="mem-badge">Best Value</span></p>
-                            <p class="mem-price">₹10,000</p>
-                            <p class="mem-original">₹12,000</p>
+                            <p class="mem-price">₹<span class="price-counter" data-final="12000"
+                                    data-start="22000">12,000</span></p>
                             <button class="mem-btn mem-btn--dark trigger-modal">Join</button>
                         </div>
 
@@ -715,72 +1297,72 @@
             </section>
         </div>
 
-        <!-- PANEL 3: Footer (slides over Membership) -->
-        <div class="stack-panel" id="stack-panel-2" style="z-index: 3; background: #111;">
-            <!-- 10x Massive Footer -->
-            <footer class="massive-footer" style="margin: 0;">
-                <div class="container">
+        <!-- PANEL 3: Footer -->
+        <div class="" id="stack-panel-2" style="z-index: 4; background: #111; padding-top: 4rem;">
+            <footer class="modern-footer"
+                style="position: relative; overflow: hidden; z-index: 4; background: #111; padding-top: 4rem;">
+                <!-- Background Video -->
+                <video class="hero-video-bg" autoplay muted loop playsinline
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.10; z-index: 0; pointer-events: none;">
+                    <source src="a.mp4" type="video/mp4">
+                </video>
+                <div class="container" style="position: relative; z-index: 1;">
                     <div class="footer-grid">
-
-                        <!-- Col 1: Brand & Newsletter -->
                         <div class="footer-col brand-col">
-                            <a href="#" class="logo footer-logo">
+                            <a href="#" class="logo footer-logo" style="margin-bottom: 1.5rem; display: inline-flex;">
                                 <img src="logo.png" alt="Hardcore Fitness">
                                 <div class="logo-text">
-                                    <span class="brand-hardcore">HARDCORE</span>
+                                    <span class="brand-hardcore" style="color: white;">HARDCORE</span>
                                     <span class="brand-fitness">FITNESS</span>
                                 </div>
                             </a>
-                            <p>A pristine, focused environment engineered solely for your physical progression.</p>
-                            <form class="newsletter-form">
-                                <input type="email" placeholder="Join our newsletter" required>
-                                <button type="submit"><ion-icon name="arrow-forward-outline"></ion-icon></button>
-                            </form>
+                            <p class="footer-desc">A pristine, focused environment engineered solely for your physical
+                                progression.</p>
                         </div>
-
-                        <!-- Col 2: Quick Links -->
                         <div class="footer-col links-col">
                             <h4>Explore</h4>
-                            <a href="#philosophy">Philosophy</a>
+                            <a href="#programs">Programs</a>
                             <a href="#facility">The Facility</a>
                             <a href="#trainers">Expert Trainers</a>
                             <a href="#membership">Membership</a>
+                            <a href="#testimonials">Reviews</a>
                         </div>
-
-                        <!-- Col 3: Hours & Support -->
                         <div class="footer-col links-col">
                             <h4>Hours</h4>
-                            <p style="color:#aaa; font-size:0.9rem; line-height:1.8; margin-bottom:1rem;">
-                                Monday – Sunday<br>
-                                <strong style="color:#fff; font-size:1.1rem;">6:00 AM – 11:00 PM</strong>
-                            </p>
-                            <h4 style="margin-top:1.5rem;">Support</h4>
-                            <a href="#">FAQ</a>
-                            <a href="#">Contact Us</a>
-                            <a href="#">Privacy Policy</a>
-                        </div>
-
-                        <!-- Col 4: Map & Contact -->
-                        <div class="footer-col map-col">
-                            <h4>Location</h4>
-                            <p>1st Floor, Radheshyam Residency, Dmart Rd, Nikol, Ahmedabad 382345</p>
-                            <div class="map-wrapper">
-                                <!-- Grayscale Google Maps iframe - Hardcore Fitness, Nikol, Ahmedabad -->
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.478!2d72.6517!3d23.0473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e870e5b9c0e63%3A0x1234567890abcdef!2sNikol%2C%20Ahmedabad%2C%20Gujarat%20382345!5e0!3m2!1sen!2sin!4v1689255283995!5m2!1sen!2sin"
-                                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <p class="footer-hours">Monday – Saturday<br><strong>5:30 AM – 11:00
+                                    PM</strong><br>Sunday<br><strong>6:00 AM – 11:00 AM</strong></p>
+                            <h4 style="margin-top: 1.5rem;">Contact</h4>
+                            <div class="footer-socials" style="gap: 1rem;">
+                                <a href="tel:+919687222006" aria-label="Call"><i class="ph-light ph-phone"></i></a>
+                                <a href="https://wa.me/919687222006" target="_blank" aria-label="WhatsApp"><i
+                                        class="ph-light ph-whatsapp-logo"></i></a>
+                                <a href="https://maps.app.goo.gl/FqWvMCDPFEfyStgUA" target="_blank"
+                                    aria-label="Location"><i class="ph-light ph-map-pin"></i></a>
                             </div>
                         </div>
-
+                        <div class="footer-col map-col">
+                            <h4>Location</h4>
+                            <p class="footer-address">
+                                <a href="https://maps.app.goo.gl/FqWvMCDPFEfyStgUA" target="_blank">1st Floor,
+                                    Radheshyam Residency, Dmart Rd, Nikol, Ahmedabad 382345</a>
+                            </p>
+                            <div class="map-wrapper">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.478!2d72.6517!3d23.0473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e870e5b9c0e63%3A0x1234567890abcdef!2sNikol%2C%20Ahmedabad%2C%20Gujarat%20382345!5e0!3m2!1sen!2sin!4v1689255283995!5m2!1sen!2sin"
+                                    width="100%" height="150" style="border:0; border-radius: 8px;" allowfullscreen=""
+                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="footer-bottom">
-                        <p>&copy; 2025 Hardcore Fitness. All rights reserved. &nbsp;·&nbsp; Nikol, Ahmedabad</p>
+                        <p>&copy; 2026 Hardcore Fitness. All rights reserved.</p>
                         <div class="footer-socials">
-                            <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                            <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                            <a href="#"><ion-icon name="logo-youtube"></ion-icon></a>
+                            <a href="https://www.facebook.com/hardcorefitnessamd/" target="_blank"><i
+                                    class="ph-light ph-facebook-logo"></i></a>
+                            <a href="https://www.instagram.com/hardcorefitnessahm/" target="_blank"><i
+                                    class="ph-light ph-instagram-logo"></i></a>
+                            <a href="https://www.youtube.com/watch?v=peSIoIAS3i0" target="_blank"><i
+                                    class="ph-light ph-youtube-logo"></i></a>
                         </div>
                     </div>
                 </div>
@@ -789,19 +1371,94 @@
 
     </div>
     <!-- ====== STACKING PANELS END ====== -->
-
-    <!-- Scroll Progress Ring -->
-    <div class="progress-ring-container" id="progress-ring">
-        <svg class="progress-ring" width="50" height="50">
-            <circle class="progress-ring__circle bg" stroke="rgba(0,0,0,0.1)" stroke-width="4" fill="transparent" r="20"
-                cx="25" cy="25" />
-            <circle class="progress-ring__circle bar" stroke="var(--color-yellow)" stroke-width="4" fill="transparent"
-                r="20" cx="25" cy="25" />
-        </svg>
-        <ion-icon name="arrow-up-outline"></ion-icon>
+    <!-- Discount Newsletter Popup -->
+    <div id="newsletter-popup" style="position: fixed; bottom: 30px; right: 30px; width: 350px; background: rgba(20, 20, 20, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2rem; z-index: 1000; transform: translateY(150%); opacity: 0; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+        <button id="close-newsletter" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--color-gray); font-size: 1.2rem; cursor: pointer; transition: color 0.3s ease;" onmouseover="this.style.color='var(--color-white)'" onmouseout="this.style.color='var(--color-gray)'"><i class="ph-light ph-x"></i></button>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
+            <i class="ph-light ph-ticket" style="font-size: 1.8rem; color: var(--color-yellow);"></i>
+            <h4 style="font-family: var(--font-heading); color: var(--color-white); margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;">Unlock 10% Off</h4>
+        </div>
+        <p style="color: #ccc; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Claim your exclusive 10% discount on any membership plan when you visit Hardcore Fitness.</p>
+        <form id="newsletter-form" style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Enter your email" required style="width: 100%; padding: 12px 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: var(--color-white); font-family: var(--font-primary); font-size: 0.9rem; outline: none; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='var(--color-yellow)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; border-radius: 6px; font-size: 0.9rem; letter-spacing: 1px; margin-top: 5px;">Claim Discount</button>
+        </form>
     </div>
 
+
     <script src="script.js"></script>
+    <script>
+        // Price countdown animation
+        // Triggers when membership section scrolls into view
+        (function () {
+            const counters = document.querySelectorAll('.price-counter');
+            let animated = false;
+
+            function formatNumber(n) {
+                return Math.round(n).toLocaleString('en-IN');
+            }
+
+            function animatePrices() {
+                if (animated) return;
+                animated = true;
+
+                counters.forEach(function (el, index) {
+                    const finalVal = parseInt(el.dataset.final);
+                    const startVal = parseInt(el.dataset.start);
+                    const duration = 2500; // total animation time in ms
+                    const settleDuration = 500; // time to hold final value
+                    let startTime = null;
+
+                    // Add a stagger delay per card
+                    const delay = index * 150;
+
+                    setTimeout(function () {
+                        // Show the start value
+                        el.textContent = formatNumber(startVal);
+                        el.classList.add('price-counting');
+
+                        function step(timestamp) {
+                            if (!startTime) startTime = timestamp;
+                            const elapsed = timestamp - startTime;
+                            const progress = Math.min(elapsed / duration, 1);
+
+                            // Ease-out cubic: fast at start, slow at end
+                            const eased = 1 - Math.pow(1 - progress, 3);
+                            const current = startVal - (startVal - finalVal) * eased;
+                            el.textContent = formatNumber(current);
+
+                            if (progress < 1) {
+                                requestAnimationFrame(step);
+                            } else {
+                                el.textContent = formatNumber(finalVal);
+                                el.classList.remove('price-counting');
+                                el.classList.add('price-settled');
+                            }
+                        }
+
+                        requestAnimationFrame(step);
+                    }, delay);
+                });
+            }
+
+            // Use IntersectionObserver to trigger when section is visible
+            const section = document.getElementById('membership');
+            if (section && 'IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            animatePrices();
+                            observer.disconnect();
+                        }
+                    });
+                }, { threshold: 0.3 });
+                observer.observe(section);
+            } else {
+                // Fallback: run immediately
+                animatePrices();
+            }
+        })();
+    </script>
 </body>
 
 </html>
