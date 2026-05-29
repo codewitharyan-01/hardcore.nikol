@@ -1,3 +1,23 @@
+// ====== PRELOADER ======
+(function() {
+    document.documentElement.classList.add('loading');
+    document.body.classList.add('loading');
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            var preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.classList.add('done');
+                document.documentElement.classList.remove('loading');
+                document.body.classList.remove('loading');
+                // Remove from DOM after transition
+                setTimeout(function() {
+                    preloader.remove();
+                }, 900);
+            }
+        }, 2200);
+    });
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Dynamic Staggered Text Reveal & Rotation for Hero
@@ -7,14 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
             "Push Your <br><span style='color: var(--color-yellow);'>Limits.</span>",
             "Turn Your <br><span style='color: var(--color-yellow);'>Hopes</span> Into <br>Reality."
         ];
-        
+
         const renderPhrase = (htmlString) => {
-            heroTitle.innerHTML = ''; 
+            heroTitle.innerHTML = '';
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = htmlString;
-            
+
             let delay = 0;
-            
+
             Array.from(tempDiv.childNodes).forEach(node => {
                 if (node.nodeType === Node.TEXT_NODE) {
                     const words = node.textContent.split(/\s+/).filter(w => w.length > 0);
@@ -54,14 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(() => {
             // Cinematic Blur Fade Out current phrase
             Array.from(heroTitle.children).forEach(child => {
-                if(child.tagName === 'SPAN') {
-                    child.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                if (child.tagName === 'SPAN') {
+                    child.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
                     child.style.opacity = '0';
                     child.style.transform = 'translate3d(0, -40px, -100px) rotateX(20deg) scale(0.9)';
                     child.style.filter = 'blur(15px)';
                 }
             });
-            
+
             // Wait for fade out, then render next phrase
             setTimeout(() => {
                 currentIndex = (currentIndex + 1) % phrases.length;
@@ -69,18 +89,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 800);
         }, 8000);
     }
+    // 1.b Hero Image Carousel
+    const heroImg = document.getElementById('hero-carousel');
+    const heroImages = Array.from({ length: 21 }, (_, i) => `${i + 1}.png`);
+    let heroIdx = 0;
+    if (heroImg) {
+        setInterval(() => {
+            // Fade out
+            heroImg.style.opacity = '0';
+            // After fade-out duration, change image and fade in
+            setTimeout(() => {
+                heroIdx = (heroIdx + 1) % heroImages.length;
+                heroImg.src = heroImages[heroIdx];
+                heroImg.style.opacity = '1';
+            }, 400); // match CSS transition duration (0.8s)
+        }, 4000);
+    }
 
     // 2. Live Gym Status
     const updateGymStatus = () => {
         const statusDot = document.querySelector('.dot');
         const statusText = document.querySelector('.status-text');
         const hour = new Date().getHours();
-        if(hour >= 5 && hour < 23) {
+        if (hour >= 5 && hour < 23) {
             statusDot.className = 'dot open';
-            statusText.innerText = 'Gym is OPEN';
+            statusText.innerText = 'GYM IS OPEN';
         } else {
             statusDot.className = 'dot closed';
-            statusText.innerText = 'Gym is CLOSED';
+            statusText.innerText = 'GYM IS CLOSED';
         }
     };
     updateGymStatus();
@@ -103,9 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetElement) {
                 targetElement.scrollIntoView({ behavior: 'smooth' });
             }
-            if(mobileMenu.classList.contains('active')){
+            if (mobileMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
     });
@@ -124,22 +161,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeMobileBtn = document.getElementById('close-mobile-menu');
 
     hamburger.addEventListener('click', () => {
+        const isActive = !hamburger.classList.contains('active');
         hamburger.classList.toggle('active');
         mobileMenu.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : '';
     });
 
     if (closeMobileBtn) {
         closeMobileBtn.addEventListener('click', () => {
             hamburger.classList.remove('active');
             mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
         });
     }
 
     // Close drawer when clicking outside (on the body)
     document.addEventListener('click', (e) => {
-        if(mobileMenu.classList.contains('active') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        if (mobileMenu.classList.contains('active') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
             hamburger.classList.remove('active');
             mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
         }
     });
 
@@ -152,40 +193,40 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             modal.classList.add('active');
-            if(mobileMenu.classList.contains('active')){
+            if (mobileMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
     });
 
     closeBtn.addEventListener('click', () => modal.classList.remove('active'));
     modal.addEventListener('click', (e) => {
-        if(e.target === modal) modal.classList.remove('active');
+        if (e.target === modal) modal.classList.remove('active');
     });
 
     const enquiryForm = document.getElementById('enquiry-form');
     if (enquiryForm) {
         enquiryForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             const name = document.getElementById('eq-name').value;
             const contact = '+91 ' + document.getElementById('eq-contact').value.trim();
-            const dob = document.getElementById('eq-dob').value;
-            
+
             // Construct WhatsApp Message
-            const message = `Hello Hardcore Fitness!%0AI would like to make an enquiry.%0A%0A*Name:* ${name}%0A*Contact Number:* ${contact}%0A*Date of Birth:* ${dob}`;
-            const waUrl = `https://wa.me/919023668571?text=${message}`;
-            
+            const message = `Hello Hardcore Fitness!%0AI would like to make an enquiry.%0A%0A*Name:* ${name}%0A*Contact Number:* ${contact}`;
+            const waUrl = `https://wa.me/919687222006?text=${message}`;
+
             // Open WhatsApp in new tab
             window.open(waUrl, '_blank');
-            
+
             const btn = enquiryForm.querySelector('button[type="submit"]');
             const originalText = btn.textContent;
             btn.textContent = 'Opening WhatsApp...';
             btn.style.backgroundColor = '#25D366'; // WhatsApp Green
             btn.style.color = 'var(--color-white)';
-            
+
             setTimeout(() => {
                 modal.classList.remove('active');
                 enquiryForm.reset();
@@ -247,53 +288,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 7. Scroll Progress Ring Optimization
-    const circle = document.querySelector('.progress-ring__circle.bar');
-    const radius = circle.r.baseVal.value;
-    const circumference = radius * 2 * Math.PI;
-    circle.style.strokeDasharray = `${circumference} ${circumference}`;
-    circle.style.strokeDashoffset = circumference;
-
-    const progressContainer = document.getElementById('progress-ring');
-    let ticking = false;
-
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const scrollPercent = (window.scrollY) / (document.documentElement.scrollHeight - window.innerHeight);
-                const offset = circumference - scrollPercent * circumference;
-                circle.style.strokeDashoffset = offset;
-
-                if(window.scrollY > 300) {
-                    progressContainer.classList.add('visible');
-                } else {
-                    progressContainer.classList.remove('visible');
-                }
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true }); // passive flag for better scroll performance
-
-    progressContainer.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
     // 8. Advanced Intersection Observer (Multi-threshold for Parallax/Fade)
     const animateCounters = (counterElement) => {
         const target = +counterElement.getAttribute('data-target');
         const duration = 2000;
         let startTimestamp = null;
-        
+
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             // Ease out cubic
             const easeProgress = 1 - Math.pow(1 - progress, 3);
             const current = Math.floor(easeProgress * target);
-            
+
             counterElement.innerText = current + (target > 1000 ? '+' : '');
-            
+
             if (progress < 1) {
                 window.requestAnimationFrame(step);
             } else {
@@ -313,13 +322,13 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                if(entry.target.classList.contains('stat-item')){
+                if (entry.target.classList.contains('stat-item')) {
                     const counter = entry.target.querySelector('.counter');
-                    if(counter) animateCounters(counter);
+                    if (counter) animateCounters(counter);
                 }
                 // Also trigger hero image scale down
-                if(entry.target.classList.contains('hero-image')){
-                     entry.target.classList.add('is-visible');
+                if (entry.target.classList.contains('hero-image')) {
+                    entry.target.classList.add('is-visible');
                 }
                 observer.unobserve(entry.target);
             }
@@ -327,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     document.querySelectorAll('.fade-up, .hero-image').forEach(el => observer.observe(el));
-    
+
     // Removed outdated Schedule filtering logic to prevent JS errors
 
     // 10. Real-time BMI Dashboard
@@ -342,14 +351,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateBMI = () => {
         const weight = parseFloat(bmiWeight.value);
         const heightCm = parseFloat(bmiHeight.value);
-        
+
         weightVal.textContent = weight;
         heightVal.textContent = heightCm;
 
         if (weight > 0 && heightCm > 0) {
             const heightM = heightCm / 100;
             const bmi = (weight / (heightM * heightM)).toFixed(1);
-            
+
             bmiValue.textContent = bmi;
 
             let status = "";
@@ -377,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    if(bmiWeight && bmiHeight) {
+    if (bmiWeight && bmiHeight) {
         bmiWeight.addEventListener('input', updateBMI);
         bmiHeight.addEventListener('input', updateBMI);
         // Initialize
@@ -389,24 +398,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollSlides = facilitySection ? facilitySection.querySelectorAll('.minimal-slider-slide') : [];
     const progressBar = document.getElementById('scroll-progress-bar');
     const currentNum = document.getElementById('current-slide-num');
-    
+
     if (facilitySection && scrollSlides.length > 0) {
         window.addEventListener('scroll', () => {
             const rect = facilitySection.getBoundingClientRect();
             // Account for 75px offset so the JS slider math matches the CSS sticky lock
             const scrollDistance = 75 - rect.top;
             const maxScroll = rect.height - window.innerHeight;
-            
+
             if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
                 let progress = scrollDistance / maxScroll;
-                
+
                 if (progressBar) progressBar.style.width = `${progress * 100}%`;
-                
+
                 let slideIndex = Math.floor(progress * scrollSlides.length);
                 if (slideIndex >= scrollSlides.length) slideIndex = scrollSlides.length - 1;
-                
+
                 if (currentNum) currentNum.textContent = `0${slideIndex + 1}`;
-                
+
                 scrollSlides.forEach((slide, index) => {
                     if (index === slideIndex) slide.classList.add('active');
                     else slide.classList.remove('active');
@@ -457,6 +466,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const programTrack = document.getElementById('program-scroll-track');
 
     if (programSection && programTrack) {
+        const programCards = programTrack.querySelectorAll('.program-card');
+
         window.addEventListener('scroll', () => {
             const rect = programSection.getBoundingClientRect();
             const scrollDistance = 75 - rect.top;
@@ -472,12 +483,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 const maxTranslate = programTrack.scrollWidth - window.innerWidth;
                 programTrack.style.transform = `translate3d(-${maxTranslate}px, 0, 0)`;
             }
+
+            // Color highlight logic based on center proximity
+            const windowCenter = window.innerWidth / 2;
+            programCards.forEach(card => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenter = cardRect.left + cardRect.width / 2;
+
+                // If card center is near the window center
+                if (Math.abs(cardCenter - windowCenter) < window.innerWidth * 0.25) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
         }, { passive: true });
     }
 
     // 13. 3D Stacking Panels Parallax Engine
     const stackPanels = document.querySelectorAll('.stack-panel');
-    
+
     if (stackPanels.length > 0) {
         const onStackScroll = () => {
             stackPanels.forEach((panel, index) => {
@@ -491,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // When rect.top === stickyTop, panel is freshly locked in. 
                 // As next panel comes up, rect.top goes further negative.
                 const panelHeight = rect.height;
-                
+
                 // Progress: 0 = panel just pinned, 1 = panel fully covered
                 // The panel starts shrinking once it's stuck and the next panel begins overlapping
                 const overlapStart = stickyTop;
@@ -518,4 +543,145 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', onStackScroll, { passive: true });
         onStackScroll(); // init on load
     }
+
+    // 14. Creative Testimonial Carousel
+    const testiSlides = document.querySelectorAll('.testi-slide');
+    const testiDotsContainer = document.querySelector('.testi-dots-c');
+    const testiPrev = document.querySelector('.testi-prev-c');
+    const testiNext = document.querySelector('.testi-next-c');
+
+    if (testiSlides.length > 0) {
+        let currentTesti = 0;
+        let testiInterval;
+
+        // Create dots
+        testiSlides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('testi-dot-c');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToTesti(i));
+            if (testiDotsContainer) testiDotsContainer.appendChild(dot);
+        });
+        const testiDots = document.querySelectorAll('.testi-dot-c');
+
+        const goToTesti = (index) => {
+            testiSlides[currentTesti].classList.remove('active');
+            testiSlides[currentTesti].classList.add('exit');
+            if (testiDots[currentTesti]) testiDots[currentTesti].classList.remove('active');
+
+            // Clean up exit class after transition
+            setTimeout(() => {
+                const exitingSlide = document.querySelector('.testi-slide.exit');
+                if (exitingSlide) exitingSlide.classList.remove('exit');
+            }, 800);
+
+            currentTesti = (index + testiSlides.length) % testiSlides.length;
+
+            testiSlides[currentTesti].classList.remove('exit');
+            testiSlides[currentTesti].classList.add('active');
+            if (testiDots[currentTesti]) testiDots[currentTesti].classList.add('active');
+
+            resetTestiInterval();
+        };
+
+        const nextTesti = () => goToTesti(currentTesti + 1);
+        const prevTesti = () => goToTesti(currentTesti - 1);
+
+        if (testiPrev) testiPrev.addEventListener('click', prevTesti);
+        if (testiNext) testiNext.addEventListener('click', nextTesti);
+
+        const resetTestiInterval = () => {
+            clearInterval(testiInterval);
+            testiInterval = setInterval(nextTesti, 5000);
+        };
+        resetTestiInterval();
+    }
+
+    // 15. Mega Menu Slide Navigation
+    const megaSlideLinks = document.querySelectorAll('.mega-slide-link');
+    megaSlideLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetSlide = parseInt(link.getAttribute('data-slide'), 10);
+            const facilitySection = document.getElementById('facility');
+
+            if (facilitySection && !isNaN(targetSlide)) {
+                const slides = facilitySection.querySelectorAll('.minimal-slider-slide');
+                const numSlides = slides.length;
+
+                if (numSlides > 0) {
+                    const rect = facilitySection.getBoundingClientRect();
+                    const maxScroll = rect.height - window.innerHeight;
+
+                    // Add 0.5 to land perfectly in the middle of the active range for that slide
+                    const progress = (targetSlide + 0.5) / numSlides;
+                    const scrollDistance = progress * maxScroll;
+
+                    // Calculate absolute scroll position
+                    const targetY = facilitySection.offsetTop - 75 + scrollDistance;
+
+                    window.scrollTo({
+                        top: targetY,
+                        behavior: 'smooth'
+                    });
+
+                    // Also close the mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            }
+        });
+    });
+
+    // 16. Newsletter Discount Popup (Appears after 10 seconds)
+    const newsletterPopup = document.getElementById('newsletter-popup');
+    const closeNewsletterBtn = document.getElementById('close-newsletter');
+    const newsletterForm = document.getElementById('newsletter-form');
+
+    if (newsletterPopup) {
+        setTimeout(() => {
+            // Check if already closed in this session to prevent spamming the user
+            if (!sessionStorage.getItem('newsletterClosed')) {
+                newsletterPopup.style.transform = 'translateY(0)';
+                newsletterPopup.style.opacity = '1';
+            }
+        }, 10000);
+
+        if (closeNewsletterBtn) {
+            closeNewsletterBtn.addEventListener('click', () => {
+                newsletterPopup.style.transform = 'translateY(150%)';
+                newsletterPopup.style.opacity = '0';
+                sessionStorage.setItem('newsletterClosed', 'true');
+            });
+        }
+
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = newsletterForm.querySelector('button[type="submit"]');
+                const originalText = btn.textContent;
+                
+                btn.textContent = 'Discount Claimed!';
+                btn.style.backgroundColor = '#2ecc71'; // Success green
+                btn.style.color = 'var(--color-white)';
+                
+                setTimeout(() => {
+                    newsletterPopup.style.transform = 'translateY(150%)';
+                    newsletterPopup.style.opacity = '0';
+                    sessionStorage.setItem('newsletterClosed', 'true');
+                    
+                    setTimeout(() => {
+                        newsletterForm.reset();
+                        btn.textContent = originalText;
+                        btn.style.backgroundColor = '';
+                        btn.style.color = '';
+                    }, 1000);
+                }, 2000);
+            });
+        }
+    }
+
 });
