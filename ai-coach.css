@@ -447,9 +447,10 @@
     .ai-coach-toggle {
         width: 54px;
         height: 54px;
-        bottom: 20px;
+        bottom: 90px;
         right: 20px;
         font-size: 24px;
+        z-index: 99999;
     }
     
     .ai-coach-input-area {
