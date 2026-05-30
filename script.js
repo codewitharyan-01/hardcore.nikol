@@ -9,12 +9,9 @@
                 preloader.classList.add('done');
                 document.documentElement.classList.remove('loading');
                 document.body.classList.remove('loading');
-                // Remove from DOM after transition
-                setTimeout(function() {
-                    preloader.remove();
-                }, 900);
+                setTimeout(function() { preloader.remove(); }, 500);
             }
-        }, 2200);
+        }, 0);
     });
 })();
 
@@ -662,3 +659,111 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
+
+// 17. Health Metrics Slider & Protein Calculator
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('metrics-slider-track');
+    const prevBtn = document.getElementById('metrics-prev');
+    const nextBtn = document.getElementById('metrics-next');
+    let currentSlide = 0;
+    const totalSlides = 2;
+
+    const updateSlider = () => {
+        track.style.transform = "translate3d(-${currentSlide * 100}%, 0, 0)";
+    };
+
+    if (prevBtn && nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        });
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+    }
+
+    // Swipe Support
+    let startX = 0;
+    let currentX = 0;
+    if (track) {
+        track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, {passive: true});
+        track.addEventListener('touchmove', (e) => { currentX = e.touches[0].clientX; }, {passive: true});
+        track.addEventListener('touchend', () => {
+            if (startX - currentX > 50) { currentSlide = (currentSlide + 1) % totalSlides; updateSlider(); }
+            if (currentX - startX > 50) { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateSlider(); }
+        });
+    }
+
+    // Protein Calculator Logic
+    const pWeight = document.getElementById('protein-weight');
+    const pGoal = document.getElementById('protein-goal');
+    const pWeightVal = document.getElementById('protein-weight-val');
+    const pValueDisplay = document.getElementById('protein-value');
+
+    const calculateProtein = () => {
+        const weight = parseFloat(pWeight.value);
+        const multiplier = parseFloat(pGoal.value);
+        pWeightVal.textContent = weight;
+        const protein = Math.round(weight * multiplier);
+        pValueDisplay.textContent = protein + 'g';
+    };
+
+    if (pWeight && pGoal) {
+        pWeight.addEventListener('input', calculateProtein);
+        pGoal.addEventListener('change', calculateProtein);
+        calculateProtein();
+    }
+});
+
+// ====== CALCULATOR CAROUSEL LOGIC ======
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('health-tools-track');
+    const slides = document.querySelectorAll('.calculator-slide');
+    const leftBtn = document.querySelector('.carousel-nav.left');
+    const rightBtn = document.querySelector('.carousel-nav.right');
+    let currentIndex = 0;
+    if(!track || slides.length === 0) return;
+    
+    const updateCarousel = () => {
+        track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+        slides.forEach((slide, idx) => {
+            slide.classList.toggle('active', idx === currentIndex);
+        });
+    };
+    
+    if(leftBtn) leftBtn.addEventListener('click', () => { currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1; updateCarousel(); });
+    if(rightBtn) rightBtn.addEventListener('click', () => { currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0; updateCarousel(); });
+    
+    // Touch/Swipe Logic
+    let startX = 0, currentX = 0;
+    track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX, {passive: true});
+    track.addEventListener('touchmove', (e) => currentX = e.touches[0].clientX, {passive: true});
+    track.addEventListener('touchend', (e) => {
+        if(startX - currentX > 50 && currentX !== 0) { currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0; updateCarousel(); }
+        if(currentX - startX > 50 && currentX !== 0) { currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1; updateCarousel(); }
+        currentX = 0;
+    });
+});
+
+// ====== 1RM & WATER INTAKE LOGIC ======
+document.addEventListener('DOMContentLoaded', () => {
+    // 1RM Logic
+    const ormWeight = document.getElementById('onerm-weight');
+    const ormReps = document.getElementById('onerm-reps');
+    const ormWeightVal = document.getElementById('onerm-weight-val');
+    const ormRepsVal = document.getElementById('onerm-reps-val');
+    const ormValue = document.getElementById('onerm-value');
+    const update1RM = () => {
+        const w = parseInt(ormWeight.value);
+        const r = parseInt(ormReps.value);
+        ormWeightVal.textContent = w;
+        ormRepsVal.textContent = r;
+        const rm = r === 1 ? w : Math.round(w * (1 + (r / 30)));
+        ormValue.textContent = rm;
+    };
+    if(ormWeight && ormReps) { ormWeight.addEventListener('input', update1RM); ormReps.addEventListener('input', update1RM); update1RM(); }
+    
+
+});

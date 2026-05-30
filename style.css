@@ -3734,4 +3734,4 @@ i { display: inline-flex; align-items: center; justify-content: center; }
 .carousel-nav:hover { background: var(--color-yellow); color: var(--color-black); }
 .carousel-nav.left { left: 0px; }
 .carousel-nav.right { right: 0px; }
-@media(max-width: 768px) { .calculator-slide { padding: 0 35px; } .carousel-nav { display: flex; width: 30px; height: 30px; font-size: 14px; } .carousel-nav.left { left: 2px; } .carousel-nav.right { right: 2px; } }
+@media(max-width: 768px) { .calculator-slide { padding: 0 45px; } .carousel-nav { display: flex; width: 40px; height: 40px; font-size: 18px; z-index: 9999; background: var(--color-yellow) !important; color: var(--color-black) !important; border: 2px solid var(--color-black); box-shadow: 0 4px 10px rgba(0,0,0,0.5); } .carousel-nav.left { left: 0px; } .carousel-nav.right { right: 0px; } }

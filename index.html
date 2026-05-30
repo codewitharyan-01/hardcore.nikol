@@ -7,6 +7,7 @@
     <title>HARDCORE FITNESS</title>
     <meta name="description" content="A pristine, focused environment for peak performance.">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ai-coach.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -21,7 +22,7 @@
     <div id="preloader">
         <div class="preloader-inner">
             <!-- Logo -->
-            <img src="logo.png" alt="Hardcore Fitness" class="preloader-logo">
+            <img src="logo.webp" alt="Hardcore Fitness" class="preloader-logo">
             <!-- Gym Name -->
             <div class="preloader-name">
                 <span class="preloader-letter">H</span><span class="preloader-letter">A</span><span
@@ -64,7 +65,7 @@
     <nav class="navbar" id="navbar">
         <div class="container nav-content">
             <a href="#" class="logo">
-                <img src="logo.png" alt="Hardcore Fitness">
+                <img src="logo.webp" alt="Hardcore Fitness">
                 <div class="logo-text">
                     <span class="brand-hardcore">HARDCORE</span>
                     <span class="brand-fitness">FITNESS</span>
@@ -104,7 +105,7 @@
                                     <a href="#facility" class="btn-outline mega-btn" style="text-decoration:none;">View
                                         Gallery</a>
                                 </div>
-                                <img src="1.png" alt="Facility">
+                                <img loading="lazy" src="1.webp" alt="Facility">
                             </div>
                         </div>
                     </div>
@@ -112,6 +113,7 @@
                 <a href="#trainers">Trainers</a>
                 <a href="#membership">Membership</a>
                 <a href="#testimonials">Reviews</a>
+                <a href="#" class="open-ai-coach"><i class="ph-light ph-barbell"></i> AI Coach</a>
             </div>
             <button class="btn-primary btn-small magnetic desktop-only trigger-modal">Enquiry</button>
             <div class="hamburger" id="hamburger">
@@ -134,7 +136,7 @@
         <div
             style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; position: relative; z-index: 1;">
             <a href="#" class="logo" style="gap: 0.5rem;">
-                <img src="logo.png" alt="Hardcore Fitness"
+                <img src="logo.webp" alt="Hardcore Fitness"
                     style="max-height: 40px; filter: drop-shadow(0 0 10px rgba(255,179,0,0.4));">
                 <div class="logo-text" style="color: var(--color-white);">
                     <span class="brand-hardcore"
@@ -225,7 +227,7 @@
             </div>
             <div class="hero-image fade-up delay-4">
                 <div class="image-frame">
-                    <img id="hero-carousel" src="1.png" alt="Gym showcase">
+                    <img id="hero-carousel" src="1.webp" alt="Gym showcase">
                 </div>
             </div>
         </header>
@@ -335,7 +337,7 @@
                 <!-- Card 1 -->
                 <div class="program-card h-program-card fade-up delay-1">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('unsplash_bg_9.webp');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">01</div>
@@ -350,7 +352,7 @@
                 <!-- Card 2 -->
                 <div class="program-card h-program-card fade-up delay-1">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('unsplash_bg_6.webp');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">02</div>
@@ -365,7 +367,7 @@
                 <!-- Card 3 -->
                 <div class="program-card h-program-card fade-up delay-2">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('unsplash_bg_5.webp');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">03</div>
@@ -380,7 +382,7 @@
                 <!-- Card 4 -->
                 <div class="program-card h-program-card fade-up delay-2">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('unsplash_bg_8.webp');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">04</div>
@@ -395,7 +397,7 @@
                 <!-- Card 5 -->
                 <div class="program-card h-program-card fade-up delay-3">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('unsplash_bg_7.webp');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">05</div>
@@ -410,7 +412,7 @@
                 <!-- Card 6 -->
                 <div class="program-card h-program-card fade-up delay-3">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('unsplash_bg_3.webp');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">06</div>
@@ -426,7 +428,7 @@
                 <!-- Card 7 -->
                 <div class="program-card h-program-card fade-up delay-1">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('unsplash_bg_4.webp');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">07</div>
@@ -441,7 +443,7 @@
                 <!-- Card 8 -->
                 <div class="program-card h-program-card fade-up delay-2">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('unsplash_bg_2.webp');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">08</div>
@@ -456,7 +458,7 @@
                 <!-- Card 9 -->
                 <div class="program-card h-program-card fade-up delay-3">
                     <div class="program-bg"
-                        style="background-image: url('https://images.unsplash.com/photo-1526232761682-d26e03ac148e?q=80&w=800&auto=format&fit=crop');">
+                        style="background-image: url('unsplash_bg_0.webp');">
                     </div>
                     <div class="program-card-inner">
                         <div class="program-number">09</div>
@@ -512,7 +514,7 @@
                             </div>
                         </div>
                         <div class="minimal-image">
-                            <img src="2.png" alt="Female Changing Room">
+                            <img loading="lazy" src="2.webp" alt="Female Changing Room">
                         </div>
                     </div>
                 </div>
@@ -531,7 +533,7 @@
                             </div>
                         </div>
                         <div class="minimal-image">
-                            <img src="10.png" alt="Workout Floor">
+                            <img loading="lazy" src="10.webp" alt="Workout Floor">
                         </div>
                     </div>
                 </div>
@@ -550,7 +552,7 @@
                             </div>
                         </div>
                         <div class="minimal-image">
-                            <img src="6.png" alt="Cardio">
+                            <img loading="lazy" src="6.webp" alt="Cardio">
                         </div>
                     </div>
                 </div>
@@ -577,7 +579,7 @@
                             </div>
                         </div>
                         <div class="minimal-image">
-                            <img src="5.png" alt="Studio">
+                            <img loading="lazy" src="5.webp" alt="Studio">
                         </div>
                     </div>
                 </div>
@@ -606,7 +608,7 @@
                             </div>
                         </div>
                         <div class="minimal-image">
-                            <img src="21.png" alt="Workout Floor">
+                            <img loading="lazy" src="21.webp" alt="Workout Floor">
                         </div>
                     </div>
                 </div>
@@ -756,23 +758,23 @@
                 <span class="tbg-float-text tbg-ft-8">HARDCORE</span>
 
                 <!-- Floating small images -->
-                <img class="tbg-float-img tbg-img-1"
-                    src="https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=200&auto=format&fit=crop"
+                <img class="tbg-float-img tbg-img-1" loading="lazy"
+                    src="unsplash_0.webp"
                     alt="">
-                <img class="tbg-float-img tbg-img-2"
-                    src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=200&auto=format&fit=crop"
+                <img class="tbg-float-img tbg-img-2" loading="lazy"
+                    src="unsplash_3.webp"
                     alt="">
-                <img class="tbg-float-img tbg-img-3"
-                    src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=200&auto=format&fit=crop"
+                <img class="tbg-float-img tbg-img-3" loading="lazy"
+                    src="unsplash_4.webp"
                     alt="">
-                <img class="tbg-float-img tbg-img-4"
-                    src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=200&auto=format&fit=crop"
+                <img class="tbg-float-img tbg-img-4" loading="lazy"
+                    src="unsplash_6.webp"
                     alt="">
-                <img class="tbg-float-img tbg-img-5"
-                    src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=200&auto=format&fit=crop"
+                <img class="tbg-float-img tbg-img-5" loading="lazy"
+                    src="unsplash_8.webp"
                     alt="">
-                <img class="tbg-float-img tbg-img-6"
-                    src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=200&auto=format&fit=crop"
+                <img class="tbg-float-img tbg-img-6" loading="lazy"
+                    src="unsplash_7.webp"
                     alt="">
 
                 <!-- Floating small video clips -->
@@ -801,7 +803,7 @@
 
                 <!-- Trainer 1 -->
                 <div class="horizontal-trainer-card">
-                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop"
+                    <img loading="lazy" src="unsplash_5.webp"
                         alt="Trainer Alex">
                     <div class="h-trainer-info">
                         <h3>Alex Carter</h3>
@@ -837,7 +839,7 @@
 
                 <!-- Trainer 2 -->
                 <div class="horizontal-trainer-card">
-                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop"
+                    <img loading="lazy" src="unsplash_1.webp"
                         alt="Trainer Sarah">
                     <div class="h-trainer-info">
                         <h3>Sarah Jenkins</h3>
@@ -873,7 +875,7 @@
 
                 <!-- Trainer 3 -->
                 <div class="horizontal-trainer-card">
-                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=800&auto=format&fit=crop"
+                    <img loading="lazy" src="unsplash_2.webp"
                         alt="Trainer Mike">
                     <div class="h-trainer-info">
                         <h3>Mike Davis</h3>
@@ -912,7 +914,7 @@
 
     <!-- Creative Parallax Divider 2 -->
     <div class="parallax-divider parallax-2"
-        style="position: relative; height: 35vh; min-height: 250px; display: flex; align-items: center; justify-content: center; background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600&auto=format&fit=crop'); background-attachment: fixed; background-size: cover; background-position: center; overflow: hidden;">
+        style="position: relative; height: 35vh; min-height: 250px; display: flex; align-items: center; justify-content: center; background-image: url('unsplash_bg_1.webp'); background-attachment: fixed; background-size: cover; background-position: center; overflow: hidden;">
         <!-- Gradient Overlay -->
         <div
             style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%); z-index: 1;">
@@ -931,59 +933,112 @@
                         <p>Calculate your Body Mass Index (BMI) instantly. Understanding your starting point is the
                             first step toward progress.</p>
                     </div>
-                    <div class="calculator-card bmi-dashboard fade-up delay-1">
-                        <div class="bmi-grid">
-                            <!-- Controls Side -->
-                            <div class="bmi-controls">
-                                <div class="slider-group">
-                                    <div class="slider-header">
-                                        <label>Weight</label>
-                                        <span class="slider-value"><span id="weight-val">75</span>
-                                            <small>kg</small></span>
+                    <div class="calculator-carousel-container fade-up delay-1">
+                        <!-- Navigation Arrows -->
+                        <div class="carousel-nav left"><i class="ph-bold ph-caret-left"></i></div>
+                        <div class="carousel-nav right"><i class="ph-bold ph-caret-right"></i></div>
+                        
+                        <div class="calculator-carousel-track" id="health-tools-track">
+                            
+                            <!-- SLIDE 1: BMI Dashboard -->
+                            <div class="calculator-slide active" data-title="Body Mass Index">
+                                <div class="calculator-card bmi-dashboard">
+                                    <div class="bmi-grid">
+                                        <!-- Controls Side -->
+                                        <div class="bmi-controls">
+                                            <div class="slider-group">
+                                                <div class="slider-header">
+                                                    <label>Weight</label>
+                                                    <span class="slider-value"><span id="weight-val">75</span>
+                                                        <small>kg</small></span>
+                                                </div>
+                                                <input type="range" id="bmi-weight" min="30" max="180" value="75" step="1"
+                                                    class="bmi-slider">
+                                            </div>
+                                            <div class="slider-group" style="margin-top: 2rem;">
+                                                <div class="slider-header">
+                                                    <label>Height</label>
+                                                    <span class="slider-value"><span id="height-val">175</span>
+                                                        <small>cm</small></span>
+                                                </div>
+                                                <input type="range" id="bmi-height" min="120" max="230" value="175" step="1"
+                                                    class="bmi-slider">
+                                            </div>
+                                        </div>
+
+                                        <!-- Visual Results Side -->
+                                        <div class="bmi-result-display">
+                                            <div class="bmi-score">
+                                                <h3 id="bmi-value">24.5</h3>
+                                                <p id="bmi-status" style="color: #2ecc71;">Optimal Weight</p>
+                                            </div>
+
+                                            <!-- Visual Gauge -->
+                                            <div class="bmi-scale-container">
+                                                <div class="bmi-scale">
+                                                    <div class="scale-segment" style="background: #3498db; flex: 18.5;"
+                                                        title="Underweight (0 - 18.5)"></div>
+                                                    <div class="scale-segment" style="background: #2ecc71; flex: 6.5;"
+                                                        title="Optimal (18.5 - 25)"></div>
+                                                    <div class="scale-segment" style="background: #f1c40f; flex: 5;"
+                                                        title="Overweight (25 - 30)"></div>
+                                                    <div class="scale-segment" style="background: #e74c3c; flex: 10;"
+                                                        title="Obese (30+)"></div>
+                                                    <!-- The needle -->
+                                                    <div class="bmi-needle" id="bmi-needle" style="left: 61%;"></div>
+                                                </div>
+                                                <div class="scale-labels">
+                                                    <span style="text-align: left;">15</span>
+                                                    <span style="text-align: center;">25</span>
+                                                    <span style="text-align: center;">30</span>
+                                                    <span style="text-align: right;">40</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <input type="range" id="bmi-weight" min="30" max="180" value="75" step="1"
-                                        class="bmi-slider">
-                                </div>
-                                <div class="slider-group" style="margin-top: 2rem;">
-                                    <div class="slider-header">
-                                        <label>Height</label>
-                                        <span class="slider-value"><span id="height-val">175</span>
-                                            <small>cm</small></span>
-                                    </div>
-                                    <input type="range" id="bmi-height" min="120" max="230" value="175" step="1"
-                                        class="bmi-slider">
                                 </div>
                             </div>
 
-                            <!-- Visual Results Side -->
-                            <div class="bmi-result-display">
-                                <div class="bmi-score">
-                                    <h3 id="bmi-value">24.5</h3>
-                                    <p id="bmi-status" style="color: #2ecc71;">Optimal Weight</p>
-                                </div>
+                            <!-- SLIDE 2: 1RM Calculator -->
+                            <div class="calculator-slide" data-title="1 Rep Max">
+                                <div class="calculator-card bmi-dashboard">
+                                    <div class="bmi-grid">
+                                        <!-- Controls Side -->
+                                        <div class="bmi-controls">
+                                            <div class="slider-group">
+                                                <div class="slider-header">
+                                                    <label>Weight Lifted</label>
+                                                    <span class="slider-value"><span id="onerm-weight-val">100</span>
+                                                        <small>kg</small></span>
+                                                </div>
+                                                <input type="range" id="onerm-weight" min="5" max="300" value="100" step="1"
+                                                    class="bmi-slider">
+                                            </div>
+                                            <div class="slider-group" style="margin-top: 2rem;">
+                                                <div class="slider-header">
+                                                    <label>Reps Done</label>
+                                                    <span class="slider-value"><span id="onerm-reps-val">5</span>
+                                                        <small>reps</small></span>
+                                                </div>
+                                                <input type="range" id="onerm-reps" min="1" max="15" value="5" step="1"
+                                                    class="bmi-slider">
+                                            </div>
+                                        </div>
 
-                                <!-- Visual Gauge -->
-                                <div class="bmi-scale-container">
-                                    <div class="bmi-scale">
-                                        <div class="scale-segment" style="background: #3498db; flex: 18.5;"
-                                            title="Underweight (0 - 18.5)"></div>
-                                        <div class="scale-segment" style="background: #2ecc71; flex: 6.5;"
-                                            title="Optimal (18.5 - 25)"></div>
-                                        <div class="scale-segment" style="background: #f1c40f; flex: 5;"
-                                            title="Overweight (25 - 30)"></div>
-                                        <div class="scale-segment" style="background: #e74c3c; flex: 10;"
-                                            title="Obese (30+)"></div>
-                                        <!-- The needle -->
-                                        <div class="bmi-needle" id="bmi-needle" style="left: 61%;"></div>
-                                    </div>
-                                    <div class="scale-labels">
-                                        <span style="text-align: left;">15</span>
-                                        <span style="text-align: center;">25</span>
-                                        <span style="text-align: center;">30</span>
-                                        <span style="text-align: right;">40</span>
+                                        <!-- Visual Results Side -->
+                                        <div class="bmi-result-display">
+                                            <div class="bmi-score">
+                                                <h3 id="onerm-value">116</h3>
+                                                <p id="onerm-status" style="color: var(--color-yellow);">Est. 1 Rep Max (kg)</p>
+                                            </div>
+                                            <p style="text-align: center; font-size: 1.2rem; color: #888; margin-top: 1rem;">Based on Epley Formula</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+
+                            
                         </div>
                     </div>
                 </div>
@@ -1299,7 +1354,7 @@
                     <div class="footer-grid">
                         <div class="footer-col brand-col">
                             <a href="#" class="logo footer-logo" style="margin-bottom: 1.5rem; display: inline-flex;">
-                                <img src="logo.png" alt="Hardcore Fitness">
+                                <img src="logo.webp" alt="Hardcore Fitness">
                                 <div class="logo-text">
                                     <span class="brand-hardcore" style="color: white;">HARDCORE</span>
                                     <span class="brand-fitness">FITNESS</span>
@@ -1363,8 +1418,48 @@
     </div>
     <!-- ====== DISCOUNT POPUP END ====== -->
 
+    <!-- ====== AI COACH WIDGET ====== -->
+    <div class="ai-coach-overlay" id="ai-coach-overlay"></div>
 
+    <div class="ai-coach-toggle" id="ai-coach-toggle" title="Chat with AI Coach">
+        <i class="ph-light ph-barbell"></i>
+    </div>
+
+    <div class="ai-coach-window" id="ai-coach-window">
+        <div class="ai-coach-header">
+            <div class="ai-coach-title">
+                <div class="ai-coach-title-icon">
+                    <i class="ph-fill ph-barbell"></i>
+                </div>
+                Hardcore AI Coach
+            </div>
+            <button class="ai-coach-close" id="ai-coach-close">
+                <i class="ph-light ph-x"></i>
+            </button>
+        </div>
+        
+        <div class="ai-coach-messages" id="ai-coach-messages">
+            <!-- Messages will be added dynamically here -->
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="ai-coach-input-area">
+            <input type="text" class="ai-coach-input" id="ai-coach-input" placeholder="Ask your coach anything...">
+            <button class="ai-coach-send" id="ai-coach-send">
+                <i class="ph-fill ph-paper-plane-right"></i>
+            </button>
+        </div>
+    </div>
+    <!-- ====== AI COACH WIDGET END ====== -->
+
+    <!-- Markdown Parser for AI Coach -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="script.js"></script>
+    <script src="ai-coach.js"></script>
     <script>
         // Price countdown animation
         // Triggers when membership section scrolls into view
