@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // 1.b Hero Image Carousel
     const heroImg = document.getElementById('hero-carousel');
-    const heroImages = Array.from({ length: 21 }, (_, i) => `${i + 1}.png`);
+    const heroImages = Array.from({ length: 21 }, (_, i) => `${i + 1}.webp`);
     let heroIdx = 0;
     if (heroImg) {
         setInterval(() => {
@@ -440,20 +440,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const trainerTrack = document.getElementById('trainer-scroll-track');
 
     if (trainerSection && trainerTrack) {
+        let isTrainerTicking = false;
         window.addEventListener('scroll', () => {
-            const rect = trainerSection.getBoundingClientRect();
-            const scrollDistance = 75 - rect.top;
-            const maxScroll = rect.height - window.innerHeight;
+            if (!isTrainerTicking) {
+                window.requestAnimationFrame(() => {
+                    const rect = trainerSection.getBoundingClientRect();
+                    const scrollDistance = 75 - rect.top;
+                    const maxScroll = rect.height - window.innerHeight;
 
-            if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
-                let progress = scrollDistance / maxScroll;
-                const maxTranslate = trainerTrack.scrollWidth - window.innerWidth;
-                trainerTrack.style.transform = `translate3d(-${progress * maxTranslate}px, 0, 0)`;
-            } else if (scrollDistance < 0) {
-                trainerTrack.style.transform = `translate3d(0, 0, 0)`;
-            } else {
-                const maxTranslate = trainerTrack.scrollWidth - window.innerWidth;
-                trainerTrack.style.transform = `translate3d(-${maxTranslate}px, 0, 0)`;
+                    if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
+                        let progress = scrollDistance / maxScroll;
+                        const maxTranslate = trainerTrack.scrollWidth - window.innerWidth;
+                        trainerTrack.style.transform = `translate3d(-${progress * maxTranslate}px, 0, 0)`;
+                    } else if (scrollDistance < 0) {
+                        trainerTrack.style.transform = `translate3d(0, 0, 0)`;
+                    } else {
+                        const maxTranslate = trainerTrack.scrollWidth - window.innerWidth;
+                        trainerTrack.style.transform = `translate3d(-${maxTranslate}px, 0, 0)`;
+                    }
+                    isTrainerTicking = false;
+                });
+                isTrainerTicking = true;
             }
         }, { passive: true });
     }
@@ -465,35 +472,47 @@ document.addEventListener('DOMContentLoaded', () => {
     if (programSection && programTrack) {
         const programCards = programTrack.querySelectorAll('.program-card');
 
+        let isProgramTicking = false;
         window.addEventListener('scroll', () => {
-            const rect = programSection.getBoundingClientRect();
-            const scrollDistance = 75 - rect.top;
-            const maxScroll = rect.height - window.innerHeight;
+            if (!isProgramTicking) {
+                window.requestAnimationFrame(() => {
+                    const rect = programSection.getBoundingClientRect();
+                    const scrollDistance = 75 - rect.top;
+                    const maxScroll = rect.height - window.innerHeight;
 
-            if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
-                let progress = scrollDistance / maxScroll;
-                const maxTranslate = programTrack.scrollWidth - window.innerWidth;
-                programTrack.style.transform = `translate3d(-${progress * maxTranslate}px, 0, 0)`;
-            } else if (scrollDistance < 0) {
-                programTrack.style.transform = `translate3d(0, 0, 0)`;
-            } else {
-                const maxTranslate = programTrack.scrollWidth - window.innerWidth;
-                programTrack.style.transform = `translate3d(-${maxTranslate}px, 0, 0)`;
+                    if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
+                        let progress = scrollDistance / maxScroll;
+                        const maxTranslate = programTrack.scrollWidth - window.innerWidth;
+                        programTrack.style.transform = `translate3d(-${progress * maxTranslate}px, 0, 0)`;
+                    } else if (scrollDistance < 0) {
+                        programTrack.style.transform = `translate3d(0, 0, 0)`;
+                    } else {
+                        const maxTranslate = programTrack.scrollWidth - window.innerWidth;
+                        programTrack.style.transform = `translate3d(-${maxTranslate}px, 0, 0)`;
+                    }
+
+                    // Color highlight logic based on center proximity
+                    const windowCenter = window.innerWidth / 2;
+                    // BATCH READS: get all left positions first to prevent layout thrashing
+                    const cardCenters = Array.from(programCards).map(card => {
+                        const cardRect = card.getBoundingClientRect();
+                        return cardRect.left + cardRect.width / 2;
+                    });
+                    
+                    // BATCH WRITES: apply classes after reading all bounds
+                    programCards.forEach((card, index) => {
+                        const cardCenter = cardCenters[index];
+                        if (Math.abs(cardCenter - windowCenter) < window.innerWidth * 0.25) {
+                            card.classList.add('active');
+                        } else {
+                            card.classList.remove('active');
+                        }
+                    });
+                    
+                    isProgramTicking = false;
+                });
+                isProgramTicking = true;
             }
-
-            // Color highlight logic based on center proximity
-            const windowCenter = window.innerWidth / 2;
-            programCards.forEach(card => {
-                const cardRect = card.getBoundingClientRect();
-                const cardCenter = cardRect.left + cardRect.width / 2;
-
-                // If card center is near the window center
-                if (Math.abs(cardCenter - windowCenter) < window.innerWidth * 0.25) {
-                    card.classList.add('active');
-                } else {
-                    card.classList.remove('active');
-                }
-            });
         }, { passive: true });
     }
 
@@ -501,40 +520,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const stackPanels = document.querySelectorAll('.stack-panel');
 
     if (stackPanels.length > 0) {
+        let isStackTicking = false;
         const onStackScroll = () => {
-            stackPanels.forEach((panel, index) => {
-                // Only panels that are NOT the last one need to shrink
-                if (index >= stackPanels.length - 1) return;
+            if (!isStackTicking) {
+                window.requestAnimationFrame(() => {
+                    // BATCH READS: get all bounding rects first
+                    const rects = Array.from(stackPanels).map(panel => panel.getBoundingClientRect());
+                    
+                    // BATCH WRITES
+                    stackPanels.forEach((panel, index) => {
+                        if (index >= stackPanels.length - 1) return;
 
-                const rect = panel.getBoundingClientRect();
-                const stickyTop = 75;
+                        const rect = rects[index];
+                        const stickyTop = 75;
+                        const panelHeight = rect.height;
+                        const overlapStart = stickyTop;
+                        const overlapEnd = stickyTop - panelHeight * 0.6; 
 
-                // How much has this panel been "covered" by the next one?
-                // When rect.top === stickyTop, panel is freshly locked in. 
-                // As next panel comes up, rect.top goes further negative.
-                const panelHeight = rect.height;
+                        let progress = 0;
+                        if (rect.top <= overlapStart) {
+                            progress = (overlapStart - rect.top) / (panelHeight * 0.6);
+                            progress = Math.max(0, Math.min(1, progress));
+                        }
 
-                // Progress: 0 = panel just pinned, 1 = panel fully covered
-                // The panel starts shrinking once it's stuck and the next panel begins overlapping
-                const overlapStart = stickyTop;
-                const overlapEnd = stickyTop - panelHeight * 0.6; // begins feeling depth after 60% overlap
+                        const scale = 1 - (progress * 0.08);
+                        const opacity = 1 - (progress * 0.35);
+                        const translateY = progress * -12;
 
-                let progress = 0;
-                if (rect.top <= overlapStart) {
-                    progress = (overlapStart - rect.top) / (panelHeight * 0.6);
-                    progress = Math.max(0, Math.min(1, progress));
-                }
-
-                // 3D scale: shrinks from 1 to 0.92 as it goes "back"
-                const scale = 1 - (progress * 0.08);
-                // Subtle opacity fade
-                const opacity = 1 - (progress * 0.35);
-                // Slight vertical push-back
-                const translateY = progress * -12;
-
-                panel.style.transform = `scale3d(${scale}, ${scale}, 1) translateY(${translateY}px)`;
-                panel.style.opacity = opacity;
-            });
+                        panel.style.transform = `scale3d(${scale}, ${scale}, 1) translateY(${translateY}px)`;
+                        panel.style.opacity = opacity;
+                    });
+                    isStackTicking = false;
+                });
+                isStackTicking = true;
+            }
         };
 
         window.addEventListener('scroll', onStackScroll, { passive: true });
