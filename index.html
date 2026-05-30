@@ -7,7 +7,6 @@
     <title>HARDCORE FITNESS</title>
     <meta name="description" content="A pristine, focused environment for peak performance.">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="ai-coach.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -17,6 +16,9 @@
 </head>
 
 <body>
+
+    <!-- ====== CUSTOM CURSOR ====== -->
+    <!-- These are populated and controlled entirely via script.js -->
 
     <!-- ====== PRELOADER ====== -->
     <div id="preloader">
@@ -113,7 +115,6 @@
                 <a href="#trainers">Trainers</a>
                 <a href="#membership">Membership</a>
                 <a href="#testimonials">Reviews</a>
-                <a href="#" class="open-ai-coach"><i class="ph-light ph-barbell"></i> AI Coach</a>
             </div>
             <button class="btn-primary btn-small magnetic desktop-only trigger-modal">Enquiry</button>
             <div class="hamburger" id="hamburger">
@@ -1296,7 +1297,6 @@
                             <p class="mem-duration">01 Month</p>
                             <p class="mem-price">₹<span class="price-counter" data-final="4000"
                                     data-start="7500">4,000</span></p>
-                            <button class="mem-btn trigger-modal">Join</button>
                         </div>
 
                         <div class="mem-divider"></div>
@@ -1307,7 +1307,6 @@
                             <p class="mem-duration">03 Months</p>
                             <p class="mem-price">₹<span class="price-counter" data-final="6500"
                                     data-start="12000">6,500</span></p>
-                            <button class="mem-btn trigger-modal">Join</button>
                         </div>
 
                         <div class="mem-divider"></div>
@@ -1318,7 +1317,6 @@
                             <p class="mem-duration">06 Months</p>
                             <p class="mem-price">₹<span class="price-counter" data-final="7500"
                                     data-start="14000">7,500</span></p>
-                            <button class="mem-btn trigger-modal">Join</button>
                         </div>
 
                         <div class="mem-divider"></div>
@@ -1332,7 +1330,6 @@
 
                             <p class="mem-price">₹<span class="price-counter" data-final="12000"
                                     data-start="22000">12,000</span></p>
-                            <button class="mem-btn mem-btn--dark trigger-modal">Join</button>
                         </div>
 
                     </div>
@@ -1402,64 +1399,60 @@
     <!-- ====== STACKING PANELS END ====== -->
 
     <!-- ====== DISCOUNT POPUP ====== -->
-    <div class="discount-popup" id="discount-popup">
-        <button class="close-popup" id="close-popup"><i class="ph-light ph-x"></i></button>
-        <div class="popup-content">
-            <div class="popup-icon">
-                <i class="ph-light ph-ticket"></i>
-            </div>
-            <h3>Unlock 10% Off!</h3>
-            <p>Claim your exclusive 10% discount on any gym plan when you visit Hardcore Fitness today.</p>
-            <a href="https://wa.me/919687222006?text=Hi,%20I%20want%20to%20book%20the%20gym%20plan,%20I%20have%2010%25%20Discount%20from%20the%20website"
-                target="_blank" class="popup-btn magnetic">
-                <i class="ph-light ph-whatsapp-logo"></i> Claim via WhatsApp
+    <div class="discount-popup" id="discount-popup" role="dialog" aria-modal="true" aria-label="10% Discount Offer">
+
+        <!-- Close button -->
+        <button class="dcp-close" id="close-popup" aria-label="Close">
+            <i class="ph-light ph-x"></i>
+        </button>
+
+        <!-- Top accent bar -->
+        <div class="dcp-accent-bar"></div>
+
+        <!-- Badge -->
+        <div class="dcp-badge">
+            <i class="ph-fill ph-tag"></i>
+            LIMITED OFFER
+        </div>
+
+        <!-- Headline -->
+        <div class="dcp-headline">
+            <span class="dcp-percent">10<sup>%</sup></span>
+            <span class="dcp-off">OFF</span>
+        </div>
+        <p class="dcp-tagline">On Any Membership Plan</p>
+
+        <!-- Divider -->
+        <div class="dcp-divider"></div>
+
+        <!-- Body copy -->
+        <p class="dcp-body">
+            Join <strong>Hardcore Fitness</strong> today and claim your exclusive 10% welcome discount.
+            Mention this offer when you enquire.
+        </p>
+
+        <!-- CTA buttons -->
+        <div class="dcp-actions">
+            <button class="dcp-btn-primary trigger-modal">
+                <i class="ph-light ph-calendar-check"></i>
+                Make an Enquiry
+            </button>
+            <a class="dcp-btn-secondary"
+               href="https://wa.me/919687222006?text=Hi%2C%20I%20saw%20the%2010%25%20discount%20offer%20on%20your%20website.%20I%27d%20like%20to%20enquire%20about%20a%20membership."
+               target="_blank" rel="noopener">
+                <i class="ph-light ph-whatsapp-logo"></i>
+                WhatsApp Us
             </a>
         </div>
+
+        <!-- Fine print -->
+        <p class="dcp-fine">*Valid for new members only. Cannot be combined with other offers.</p>
     </div>
     <!-- ====== DISCOUNT POPUP END ====== -->
 
-    <!-- ====== AI COACH WIDGET ====== -->
-    <div class="ai-coach-overlay" id="ai-coach-overlay"></div>
 
-    <div class="ai-coach-toggle" id="ai-coach-toggle" title="Chat with AI Coach">
-        <i class="ph-light ph-barbell"></i>
-    </div>
 
-    <div class="ai-coach-window" id="ai-coach-window">
-        <div class="ai-coach-header">
-            <div class="ai-coach-title">
-                <div class="ai-coach-title-icon">
-                    <i class="ph-fill ph-barbell"></i>
-                </div>
-                Hardcore AI Coach
-            </div>
-            <button class="ai-coach-close" id="ai-coach-close">
-                <i class="ph-light ph-x"></i>
-            </button>
-        </div>
-        
-        <div class="ai-coach-messages" id="ai-coach-messages">
-            <!-- Messages will be added dynamically here -->
-            <div class="typing-indicator" id="typing-indicator">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-        </div>
-
-        <div class="ai-coach-input-area">
-            <input type="text" class="ai-coach-input" id="ai-coach-input" placeholder="Ask your coach anything...">
-            <button class="ai-coach-send" id="ai-coach-send">
-                <i class="ph-fill ph-paper-plane-right"></i>
-            </button>
-        </div>
-    </div>
-    <!-- ====== AI COACH WIDGET END ====== -->
-
-    <!-- Markdown Parser for AI Coach -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="script.js"></script>
-    <script src="ai-coach.js"></script>
     <script>
         // Price countdown animation
         // Triggers when membership section scrolls into view
