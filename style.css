@@ -2048,7 +2048,7 @@ button {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('logo.png');
+    background-image: url('logo.webp');
     background-size: 40%;
     background-position: center;
     background-repeat: no-repeat;
@@ -3711,3 +3711,27 @@ i { display: inline-flex; align-items: center; justify-content: center; }
     }
 }
 
+
+/* ====== GPU HARDWARE ACCELERATION (ZERO LAG) ====== */
+.stack-panel, .minimal-slider-slide, .trainer-card, .program-card, .tbg-float-img, .tbg-float-vid, .tbg-float-text, #trainer-scroll-track, #program-scroll-track, .hero-image, .fade-up, .stagger-word { will-change: transform, opacity; -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-perspective: 1000; perspective: 1000; transform: translateZ(0); }
+
+/* ====== METRICS SLIDER ====== */
+.metrics-slider-container { position: relative; width: 100%; overflow: visible; padding: 0 10px; }
+.metrics-slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); width: 100%; }
+.metrics-slide { min-width: 100%; flex-shrink: 0; padding: 0 10px; box-sizing: border-box; }
+.metrics-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background: rgba(255, 255, 255, 1); border: none; border-radius: 50%; color: var(--color-black); font-size: 24px; cursor: pointer; z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+.metrics-nav-btn:hover { background: var(--color-yellow); transform: translateY(-50%) scale(1.1); }
+.metrics-nav-btn.prev { left: -15px; }
+.metrics-nav-btn.next { right: -15px; }
+@media (max-width: 768px) { .metrics-nav-btn { width: 44px; height: 44px; font-size: 20px; } .metrics-nav-btn.prev { left: -5px; } .metrics-nav-btn.next { right: -5px; } .metrics-slider-container { overflow: hidden; padding: 0; } .metrics-slide { padding: 0; } }
+
+/* ====== CALCULATOR CAROUSEL ====== */
+.calculator-carousel-container { position: relative; overflow: hidden; width: 100%; border-radius: 20px; }
+.calculator-carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); width: 100%; will-change: transform; transform: translateZ(0); }
+.calculator-slide { min-width: 100%; flex: 0 0 100%; opacity: 0.5; transition: opacity 0.5s ease; padding: 0 40px; box-sizing: border-box; }
+.calculator-slide.active { opacity: 1; }
+.carousel-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0, 0, 0, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; color: var(--color-black); backdrop-filter: blur(5px); transition: all 0.3s ease; border: 1px solid rgba(0, 0, 0, 0.1); }
+.carousel-nav:hover { background: var(--color-yellow); color: var(--color-black); }
+.carousel-nav.left { left: 0px; }
+.carousel-nav.right { right: 0px; }
+@media(max-width: 768px) { .calculator-slide { padding: 0 35px; } .carousel-nav { display: flex; width: 30px; height: 30px; font-size: 14px; } .carousel-nav.left { left: 2px; } .carousel-nav.right { right: 2px; } }
