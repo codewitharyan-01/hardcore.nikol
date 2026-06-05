@@ -11,61 +11,11 @@
                 document.body.classList.remove('loading');
                 setTimeout(function() { preloader.remove(); }, 900);
             }
-        }, 0);
+        }, 3000);
     });
 })();
 
-// ====== SMOOTH CUSTOM CURSOR ======
-document.addEventListener('DOMContentLoaded', function initCursor() {
-    // Detect touch/mobile — skip cursor on those
-    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-    if (isTouchDevice) {
-        document.body.classList.add('mobile-device');
-        return;
-    }
 
-    const dot  = document.createElement('div');
-    const ring = document.createElement('div');
-    dot.className  = 'custom-cursor-dot';
-    ring.className = 'custom-cursor-ring';
-    document.body.appendChild(ring);
-    document.body.appendChild(dot);
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX  = mouseX;
-    let ringY  = mouseY;
-    const lerpFactor = 0.12; // Ring lags behind dot — feels like it's "chasing"
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        // Dot snaps immediately
-        dot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
-    }, { passive: true });
-
-    // Lerp the ring for the smooth trail effect
-    function animateCursor() {
-        ringX += (mouseX - ringX) * lerpFactor;
-        ringY += (mouseY - ringY) * lerpFactor;
-        ring.style.transform = `translate(${ringX - 16}px, ${ringY - 16}px)`;
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Grow cursor on interactive elements
-    const interactiveSelectors = 'a, button, [class*="btn"], input, select, .hamburger, .carousel-nav, .mem-btn, .testi-prev-c, .testi-next-c, .close-modal, .close-popup, .mega-slide-link, .mobile-link, .popup-btn';
-    document.addEventListener('mouseover', (e) => {
-        if (e.target.closest(interactiveSelectors)) {
-            document.body.classList.add('cursor-link');
-        }
-    }, { passive: true });
-    document.addEventListener('mouseout', (e) => {
-        if (e.target.closest(interactiveSelectors)) {
-            document.body.classList.remove('cursor-link');
-        }
-    }, { passive: true });
-});
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -731,3 +681,17 @@ document.addEventListener('DOMContentLoaded', () => {
         update1RM();
     }
 });
+
+// ====== OMNIDIRECTIONAL SCROLLING ======
+// Translates any horizontal scrolling (left/right) into vertical scrolling (up/down)
+// so that users who don't know how to scroll vertically can still explore the site.
+window.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault();
+        window.scrollBy({
+            top: e.deltaX,
+            left: 0,
+            behavior: 'auto'
+        });
+    }
+}, { passive: false });
