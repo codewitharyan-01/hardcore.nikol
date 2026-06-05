@@ -365,16 +365,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const stackPanels = document.querySelectorAll('.stack-panel');
 
     // Single unified RAF loop
-    let lastScrollY = window.scrollY;
+    let lastScrollY = window.scrollY - 1; // force first run
+    let winHeight = window.innerHeight;
+    let winWidth = window.innerWidth;
+    
+    window.addEventListener('resize', () => {
+        winHeight = window.innerHeight;
+        winWidth = window.innerWidth;
+    }, { passive: true });
+
+    const programCards = programTrack ? programTrack.querySelectorAll('.program-card') : [];
 
     function unifiedScrollLoop() {
         const scrollY = window.scrollY;
+        const isScrolling = scrollY !== lastScrollY;
 
         // ---- Facility Slider ----
-        if (facilitySection && scrollSlides.length > 0) {
+        if (isScrolling && facilitySection && scrollSlides.length > 0) {
             const rect = facilitySection.getBoundingClientRect();
             const scrollDistance = 75 - rect.top;
-            const maxScroll = rect.height - window.innerHeight;
+            const maxScroll = rect.height - winHeight;
             let slideIndex = 0;
             if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
                 const progress = scrollDistance / maxScroll;
@@ -390,21 +400,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ---- Trainer Track (lerp) ----
         if (trainerSection && trainerTrack) {
-            const rect = trainerSection.getBoundingClientRect();
-            const scrollDistance = 75 - rect.top;
-            const maxScroll = rect.height - window.innerHeight;
-            if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
-                const progress = scrollDistance / maxScroll;
-                trainerTargetX = progress * (trainerTrack.scrollWidth - window.innerWidth);
-            } else if (scrollDistance < 0) {
-                trainerTargetX = 0;
-            } else {
-                trainerTargetX = trainerTrack.scrollWidth - window.innerWidth;
+            if (isScrolling) {
+                const rect = trainerSection.getBoundingClientRect();
+                const scrollDistance = 75 - rect.top;
+                const maxScroll = rect.height - winHeight;
+                if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
+                    const progress = scrollDistance / maxScroll;
+                    trainerTargetX = progress * (trainerTrack.scrollWidth - winWidth);
+                } else if (scrollDistance < 0) {
+                    trainerTargetX = 0;
+                } else {
+                    trainerTargetX = trainerTrack.scrollWidth - winWidth;
+                }
             }
             trainerCurrentX += (trainerTargetX - trainerCurrentX) * LERP;
-            if (Math.abs(trainerCurrentX - trainerTargetX) > 0.5) {
+            const moving = Math.abs(trainerCurrentX - trainerTargetX) > 0.5;
+            if (moving) {
                 trainerTrack.style.transform = `translate3d(-${trainerCurrentX}px, 0, 0)`;
-            } else {
+            } else if (isScrolling) {
                 trainerCurrentX = trainerTargetX;
                 trainerTrack.style.transform = `translate3d(-${trainerTargetX}px, 0, 0)`;
             }
@@ -412,35 +425,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ---- Program Track (lerp) ----
         if (programSection && programTrack) {
-            const rect = programSection.getBoundingClientRect();
-            const scrollDistance = 75 - rect.top;
-            const maxScroll = rect.height - window.innerHeight;
-            const programCards = programTrack.querySelectorAll('.program-card');
-            if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
-                const progress = scrollDistance / maxScroll;
-                programTargetX = progress * (programTrack.scrollWidth - window.innerWidth);
-            } else if (scrollDistance < 0) {
-                programTargetX = 0;
-            } else {
-                programTargetX = programTrack.scrollWidth - window.innerWidth;
+            if (isScrolling) {
+                const rect = programSection.getBoundingClientRect();
+                const scrollDistance = 75 - rect.top;
+                const maxScroll = rect.height - winHeight;
+                if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
+                    const progress = scrollDistance / maxScroll;
+                    programTargetX = progress * (programTrack.scrollWidth - winWidth);
+                } else if (scrollDistance < 0) {
+                    programTargetX = 0;
+                } else {
+                    programTargetX = programTrack.scrollWidth - winWidth;
+                }
             }
             programCurrentX += (programTargetX - programCurrentX) * LERP;
-            if (Math.abs(programCurrentX - programTargetX) > 0.5) {
+            const moving = Math.abs(programCurrentX - programTargetX) > 0.5;
+            if (moving) {
                 programTrack.style.transform = `translate3d(-${programCurrentX}px, 0, 0)`;
-            } else {
+            } else if (isScrolling) {
                 programCurrentX = programTargetX;
                 programTrack.style.transform = `translate3d(-${programTargetX}px, 0, 0)`;
             }
 
             // Card highlight — batch reads then writes
-            if (programCards.length > 0) {
-                const windowCenter = window.innerWidth / 2;
+            if (programCards.length > 0 && (moving || isScrolling)) {
+                const windowCenter = winWidth / 2;
                 const cardCenters  = Array.from(programCards).map(card => {
                     const r = card.getBoundingClientRect();
                     return r.left + r.width / 2;
                 });
                 programCards.forEach((card, idx) => {
-                    if (Math.abs(cardCenters[idx] - windowCenter) < window.innerWidth * 0.25) {
+                    if (Math.abs(cardCenters[idx] - windowCenter) < winWidth * 0.25) {
                         card.classList.add('active');
                     } else {
                         card.classList.remove('active');
@@ -450,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // ---- Stacking Panels ----
-        if (stackPanels.length > 0) {
+        if (isScrolling && stackPanels.length > 0) {
             // Batch reads
             const rects = Array.from(stackPanels).map(p => p.getBoundingClientRect());
             // Batch writes
@@ -682,71 +697,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ====== UNIVERSAL SCROLLING & DRAG-TO-SCROLL ======
-// 1. Translates any wheel scroll direction into vertical scrolling (Desktop)
-window.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 0) {
-        e.preventDefault();
-        window.scrollBy({ top: e.deltaX, left: 0, behavior: 'auto' });
+// ====== AUTO SCROLL IDLE LOGIC ======
+(function() {
+    let idleTimeout = null;
+    let isAutoScrolling = false;
+    let autoScrollRaf = null;
+    const idleTime = 5000; // 5 seconds
+    const scrollSpeed = 1; // Pixels per frame
+
+    function startAutoScroll() {
+        if (!isAutoScrolling) {
+            isAutoScrolling = true;
+            autoScrollStep();
+        }
     }
-}, { passive: false });
 
-// 2. Drag-to-scroll functionality for mouse users (Desktop)
-let isDraggingPage = false;
-let startDragY, startScrollPageY, startDragX;
-
-document.addEventListener('mousedown', (e) => {
-    const interactiveTags = ['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT'];
-    if (interactiveTags.includes(e.target.tagName) || e.target.closest('a, button, input')) return;
-    
-    isDraggingPage = true;
-    startDragY = e.pageY;
-    startDragX = e.pageX;
-    startScrollPageY = window.scrollY;
-    document.body.style.cursor = 'grabbing';
-});
-
-document.addEventListener('mousemove', (e) => {
-    if (!isDraggingPage) return;
-    if (Math.abs(e.pageY - startDragY) > 5 || Math.abs(e.pageX - startDragX) > 5) {
-        e.preventDefault();
-        document.body.style.userSelect = 'none';
-        window.scrollTo(0, startScrollPageY - (e.pageY - startDragY));
+    function stopAutoScroll() {
+        if (isAutoScrolling) {
+            isAutoScrolling = false;
+            if (autoScrollRaf) {
+                cancelAnimationFrame(autoScrollRaf);
+                autoScrollRaf = null;
+            }
+        }
     }
-});
 
-const stopDragging = () => {
-    if (isDraggingPage) {
-        isDraggingPage = false;
-        document.body.style.cursor = '';
-        document.body.style.userSelect = '';
+    function autoScrollStep() {
+        if (!isAutoScrolling) return;
+
+        // Stop if we hit the bottom of the page
+        if ((window.innerHeight + Math.ceil(window.scrollY)) >= document.body.offsetHeight) {
+            stopAutoScroll();
+            return;
+        }
+
+        window.scrollBy(0, scrollSpeed);
+        autoScrollRaf = requestAnimationFrame(autoScrollStep);
     }
-};
 
-document.addEventListener('mouseup', stopDragging);
-document.addEventListener('mouseleave', stopDragging);
-
-// 3. Touch-to-scroll for Mobile (Translates horizontal swipes to vertical scroll)
-let touchStartX, touchStartY, touchStartScrollY;
-
-document.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-    touchStartScrollY = window.scrollY;
-}, { passive: true });
-
-document.addEventListener('touchmove', (e) => {
-    // Ignore horizontal scroll translation if touching a carousel/slider so we don't break them
-    if (e.target.closest('.carousel, .slider, .track, #health-tools-track, #metrics-slider-track, .testi-slide, .minimal-slider-slide')) return;
-
-    const currentX = e.touches[0].clientX;
-    const currentY = e.touches[0].clientY;
-    const diffX = touchStartX - currentX;
-    const diffY = touchStartY - currentY;
-
-    // If the user swipes horizontally more than vertically, convert it to vertical scroll
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 5) {
-        e.preventDefault(); // Prevent native horizontal behavior
-        window.scrollTo(0, touchStartScrollY + diffX);
+    function resetIdleTimer() {
+        // Only stop auto-scroll if it was an actual user interaction
+        stopAutoScroll();
+        
+        clearTimeout(idleTimeout);
+        idleTimeout = setTimeout(startAutoScroll, idleTime);
     }
-}, { passive: false });
+
+    // Listen to explicit user interaction events (excluding 'scroll' to allow auto-scrolling to continue)
+    const interactionEvents = ['wheel', 'touchstart', 'touchmove', 'keydown', 'mousedown', 'mousemove'];
+    interactionEvents.forEach(event => {
+        window.addEventListener(event, resetIdleTimer, { passive: true });
+    });
+
+    // Start the timer initially
+    idleTimeout = setTimeout(startAutoScroll, idleTime);
+})();

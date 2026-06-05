@@ -24,69 +24,7 @@
     --transition-fast: all 0.3s var(--ease-out-expo);
 }
 
-/* ====== SMOOTH CUSTOM CURSOR ====== */
-.custom-cursor-dot,
-.custom-cursor-ring {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 999999;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    will-change: transform;
-}
 
-.custom-cursor-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--color-black);
-    transition: transform 0.1s ease, background 0.2s ease, opacity 0.2s ease;
-}
-
-.custom-cursor-ring {
-    width: 32px;
-    height: 32px;
-    border: 1.5px solid rgba(0, 0, 0, 0.5);
-    transition: width 0.4s var(--ease-out-expo),
-                height 0.4s var(--ease-out-expo),
-                border-color 0.3s ease,
-                opacity 0.3s ease;
-}
-
-body:not(.mobile-device) .custom-cursor-dot,
-body:not(.mobile-device) .custom-cursor-ring {
-    opacity: 1;
-}
-
-body.cursor-link .custom-cursor-ring {
-    width: 56px;
-    height: 56px;
-    border-color: var(--color-yellow);
-    border-width: 2px;
-}
-
-body.cursor-link .custom-cursor-dot {
-    background: var(--color-yellow);
-    transform: translate(-50%, -50%) scale(1.5);
-}
-
-/* Hide native cursor on desktop */
-@media (pointer: fine) {
-    body:not(.mobile-device) {
-        cursor: none;
-    }
-    body:not(.mobile-device) a,
-    body:not(.mobile-device) button,
-    body:not(.mobile-device) [class*="btn"],
-    body:not(.mobile-device) input,
-    body:not(.mobile-device) select,
-    body:not(.mobile-device) .hamburger,
-    body:not(.mobile-device) .carousel-nav {
-        cursor: none;
-    }
-}
-/* ====== END CURSOR ====== */
 
 * {
     margin: 0;
