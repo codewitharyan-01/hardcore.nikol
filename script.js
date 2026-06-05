@@ -697,58 +697,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ====== AUTO SCROLL IDLE LOGIC ======
-(function() {
-    let idleTimeout = null;
-    let isAutoScrolling = false;
-    let autoScrollRaf = null;
-    const idleTime = 5000; // 5 seconds
-    const scrollSpeed = 1; // Pixels per frame
-
-    function startAutoScroll() {
-        if (!isAutoScrolling) {
-            isAutoScrolling = true;
-            autoScrollStep();
-        }
-    }
-
-    function stopAutoScroll() {
-        if (isAutoScrolling) {
-            isAutoScrolling = false;
-            if (autoScrollRaf) {
-                cancelAnimationFrame(autoScrollRaf);
-                autoScrollRaf = null;
-            }
-        }
-    }
-
-    function autoScrollStep() {
-        if (!isAutoScrolling) return;
-
-        // Stop if we hit the bottom of the page
-        if ((window.innerHeight + Math.ceil(window.scrollY)) >= document.body.offsetHeight) {
-            stopAutoScroll();
-            return;
-        }
-
-        window.scrollBy(0, scrollSpeed);
-        autoScrollRaf = requestAnimationFrame(autoScrollStep);
-    }
-
-    function resetIdleTimer() {
-        // Only stop auto-scroll if it was an actual user interaction
-        stopAutoScroll();
+// ====== LAZY LOAD VIDEOS LOGIC ======
+document.addEventListener('DOMContentLoaded', () => {
+    const lazyVideos = document.querySelectorAll('.lazy-video');
+    if ('IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(video => {
+                if (video.isIntersecting) {
+                    video.target.play().catch(e => console.log('Autoplay prevented', e));
+                } else {
+                    video.target.pause();
+                }
+            });
+        }, { rootMargin: '0px 0px 400px 0px' });
         
-        clearTimeout(idleTimeout);
-        idleTimeout = setTimeout(startAutoScroll, idleTime);
+        lazyVideos.forEach(v => videoObserver.observe(v));
+    } else {
+        // Fallback for older browsers
+        lazyVideos.forEach(v => v.play().catch(e => {}));
     }
-
-    // Listen to explicit user interaction events (excluding 'scroll' to allow auto-scrolling to continue)
-    const interactionEvents = ['wheel', 'touchstart', 'touchmove', 'keydown', 'mousedown', 'mousemove'];
-    interactionEvents.forEach(event => {
-        window.addEventListener(event, resetIdleTimer, { passive: true });
-    });
-
-    // Start the timer initially
-    idleTimeout = setTimeout(startAutoScroll, idleTime);
-})();
+});
