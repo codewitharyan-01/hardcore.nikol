@@ -682,11 +682,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ====== OMNIDIRECTIONAL SCROLLING ======
-// Translates any horizontal scrolling (left/right) into vertical scrolling (up/down)
-// so that users who don't know how to scroll vertically can still explore the site.
+// ====== UNIVERSAL SCROLLING & DRAG-TO-SCROLL ======
+// 1. Translates any scroll direction into vertical scrolling
 window.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 0) {
         e.preventDefault();
         window.scrollBy({
             top: e.deltaX,
@@ -695,3 +694,43 @@ window.addEventListener('wheel', (e) => {
         });
     }
 }, { passive: false });
+
+// 2. Drag-to-scroll functionality for mouse users
+let isDraggingPage = false;
+let startDragY, startScrollPageY;
+let startDragX; // to differentiate click from drag
+
+document.addEventListener('mousedown', (e) => {
+    // Ignore interactive elements so users can still click links, buttons, and type in inputs
+    const interactiveTags = ['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT'];
+    if (interactiveTags.includes(e.target.tagName) || e.target.closest('a, button, input')) return;
+    
+    isDraggingPage = true;
+    startDragY = e.pageY;
+    startDragX = e.pageX;
+    startScrollPageY = window.scrollY;
+    document.body.style.cursor = 'grabbing';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDraggingPage) return;
+    
+    // Only start dragging if the mouse moved a little bit to avoid accidental clicks
+    if (Math.abs(e.pageY - startDragY) > 5 || Math.abs(e.pageX - startDragX) > 5) {
+        e.preventDefault(); // Prevent text selection
+        document.body.style.userSelect = 'none';
+        const dy = e.pageY - startDragY;
+        window.scrollTo(0, startScrollPageY - dy);
+    }
+});
+
+const stopDragging = () => {
+    if (isDraggingPage) {
+        isDraggingPage = false;
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+    }
+};
+
+document.addEventListener('mouseup', stopDragging);
+document.addEventListener('mouseleave', stopDragging);
