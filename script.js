@@ -683,25 +683,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ====== UNIVERSAL SCROLLING & DRAG-TO-SCROLL ======
-// 1. Translates any scroll direction into vertical scrolling
+// 1. Translates any wheel scroll direction into vertical scrolling (Desktop)
 window.addEventListener('wheel', (e) => {
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 0) {
         e.preventDefault();
-        window.scrollBy({
-            top: e.deltaX,
-            left: 0,
-            behavior: 'auto'
-        });
+        window.scrollBy({ top: e.deltaX, left: 0, behavior: 'auto' });
     }
 }, { passive: false });
 
-// 2. Drag-to-scroll functionality for mouse users
+// 2. Drag-to-scroll functionality for mouse users (Desktop)
 let isDraggingPage = false;
-let startDragY, startScrollPageY;
-let startDragX; // to differentiate click from drag
+let startDragY, startScrollPageY, startDragX;
 
 document.addEventListener('mousedown', (e) => {
-    // Ignore interactive elements so users can still click links, buttons, and type in inputs
     const interactiveTags = ['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT'];
     if (interactiveTags.includes(e.target.tagName) || e.target.closest('a, button, input')) return;
     
@@ -714,13 +708,10 @@ document.addEventListener('mousedown', (e) => {
 
 document.addEventListener('mousemove', (e) => {
     if (!isDraggingPage) return;
-    
-    // Only start dragging if the mouse moved a little bit to avoid accidental clicks
     if (Math.abs(e.pageY - startDragY) > 5 || Math.abs(e.pageX - startDragX) > 5) {
-        e.preventDefault(); // Prevent text selection
+        e.preventDefault();
         document.body.style.userSelect = 'none';
-        const dy = e.pageY - startDragY;
-        window.scrollTo(0, startScrollPageY - dy);
+        window.scrollTo(0, startScrollPageY - (e.pageY - startDragY));
     }
 });
 
@@ -734,3 +725,28 @@ const stopDragging = () => {
 
 document.addEventListener('mouseup', stopDragging);
 document.addEventListener('mouseleave', stopDragging);
+
+// 3. Touch-to-scroll for Mobile (Translates horizontal swipes to vertical scroll)
+let touchStartX, touchStartY, touchStartScrollY;
+
+document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartScrollY = window.scrollY;
+}, { passive: true });
+
+document.addEventListener('touchmove', (e) => {
+    // Ignore horizontal scroll translation if touching a carousel/slider so we don't break them
+    if (e.target.closest('.carousel, .slider, .track, #health-tools-track, #metrics-slider-track, .testi-slide, .minimal-slider-slide')) return;
+
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = touchStartX - currentX;
+    const diffY = touchStartY - currentY;
+
+    // If the user swipes horizontally more than vertically, convert it to vertical scroll
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 5) {
+        e.preventDefault(); // Prevent native horizontal behavior
+        window.scrollTo(0, touchStartScrollY + diffX);
+    }
+}, { passive: false });
