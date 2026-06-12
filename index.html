@@ -1443,6 +1443,52 @@
 
 
 
+    <!-- AI Chat Box UI -->
+    <div id="ai-chat-widget">
+        <button id="chat-toggle-btn" class="magnetic" aria-label="Open Chat">
+            <i class="ph-fill ph-sparkle"></i>
+        </button>
+        <div id="chat-box" class="hidden">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <h3>Hardcore AI</h3>
+                    <span class="chat-status">Online</span>
+                </div>
+                <div class="chat-header-actions">
+                    <button id="clear-chat-btn" aria-label="Clear Chat" title="Clear Chat"><i class="ph-light ph-trash"></i></button>
+                    <button id="close-chat-btn" aria-label="Close Chat"><i class="ph-light ph-x"></i></button>
+                </div>
+            </div>
+            
+            <div id="chat-messages">
+                <!-- Messages go here -->
+            </div>
+
+            <!-- Typing Indicator -->
+            <div id="chat-typing-indicator" class="hidden">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+
+            <div class="chat-bottom-wrapper">
+                <!-- Quick Prompts Scroll View -->
+                <div class="quick-prompts-wrapper">
+                    <button class="quick-prompt-btn">Membership plans?</button>
+                    <button class="quick-prompt-btn">Gym timings?</button>
+                    <button class="quick-prompt-btn">Personal trainers?</button>
+                </div>
+
+                <div class="chat-input-area">
+                    <textarea id="chat-input" placeholder="Ask anything..." rows="1" maxlength="500"></textarea>
+                    <button id="send-chat-btn"><i class="ph-fill ph-paper-plane-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="chat.js"></script>
     <script src="script.js"></script>
     <script>
         // Price countdown animation
