@@ -317,7 +317,7 @@
     <!-- ====== TRAINING PROGRAMS SECTION (Horizontal Scroll) ====== -->
     <section id="programs" style="position: relative; padding: 0; background: var(--color-black);">
         <div class="program-sticky"
-            style="width: 100vw; overflow-x: auto; overflow-y: hidden; background: transparent; display: flex; flex-direction: column; justify-content: center; height: calc(100vh - 75px); scroll-snap-type: x mandatory;">
+            style="width: 100vw; background: transparent; display: flex; flex-direction: column; justify-content: center; height: calc(100vh - 75px);">
 
             <!-- Background Video -->
             <video class="hero-video-bg" autoplay muted loop playsinline style="opacity: 0.05;">
@@ -325,7 +325,7 @@
             </video>
 
             <div class="program-track" id="program-scroll-track"
-                style="display: flex; width: max-content; height: 70vh; align-items: center; padding: 0 10vw; gap: 4vw; will-change: transform;">
+                style="display: flex; width: 100vw; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; height: 70vh; align-items: center; padding: 0 10vw; gap: 4vw; will-change: transform;">
 
                 <!-- Creative Intro Card -->
                 <div class="program-intro-card">
@@ -484,7 +484,7 @@
     <!-- Minimalist Split Scroll Gallery -->
     <section id="facility" style="position: relative; background: var(--color-white);">
         <div class="sticky-container"
-            style="height: calc(100vh - 75px); width: 100vw; overflow-x: auto; overflow-y: hidden; display: flex; align-items: stretch; justify-content: flex-start; scroll-snap-type: x mandatory; margin-left: calc(-50vw + 50%); background: var(--color-white);">
+            style="height: calc(100vh - 75px); width: 100vw; display: flex; align-items: stretch; justify-content: flex-start; margin-left: calc(-50vw + 50%); background: var(--color-white);">
 
             <!-- Creative Animated Background Elements -->
             <div
@@ -504,7 +504,7 @@
 
 
 
-            <div class="minimal-slider-track" id="facility-scroll-slider">
+            <div class="minimal-slider-track" id="facility-scroll-slider" style="width: 100vw; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;">
                 <!-- Slide 1 -->
                 <div class="minimal-slider-slide active">
                     <div class="minimal-content">
@@ -671,12 +671,12 @@
     <!-- Expert Trainers Section (Horizontal Scroll Gallery) -->
     <section id="trainers" style="position: relative; padding: 0; background: var(--color-light-gray);">
         <div class="trainer-sticky"
-            style="height: calc(100vh - 75px); width: 100vw; overflow-x: auto; overflow-y: hidden; background: var(--color-light-gray); display: flex; flex-direction: column; justify-content: center; position: relative; scroll-snap-type: x mandatory;">
+            style="height: calc(100vh - 75px); width: 100vw; background: var(--color-light-gray); display: flex; flex-direction: column; justify-content: center; position: relative;">
 
             <!-- Background removed per user request -->
 
             <div class="trainer-track" id="trainer-scroll-track"
-                style="display: flex; width: max-content; height: 75vh; align-items: center; padding: 0 10vw; gap: 8vw; will-change: transform; position: relative; z-index: 10;">
+                style="display: flex; width: 100vw; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; height: 75vh; align-items: center; padding: 0 10vw; gap: 8vw; will-change: transform; position: relative; z-index: 10;">
 
                 <!-- Intro Title -->
                 <div class="trainer-intro-card" style="width: 40vw; max-width: 500px; flex-shrink: 0;">

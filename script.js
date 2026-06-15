@@ -673,7 +673,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ====== AUTO-SCROLL HORIZONTAL SECTIONS ======
 document.addEventListener('DOMContentLoaded', () => {
-    const autoScrollContainers = document.querySelectorAll('.program-sticky, #facility .sticky-container, .trainer-sticky');
+    // The inner tracks are the actual scroll containers
+    const autoScrollContainers = document.querySelectorAll('.program-track, .minimal-slider-track, .trainer-track');
     autoScrollContainers.forEach(container => {
         let isInteracting = false;
         container.addEventListener('touchstart', () => isInteracting = true, { passive: true });
@@ -690,8 +691,32 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (container.scrollLeft >= maxScroll - 10) {
                 container.scrollTo({ left: 0, behavior: 'smooth' });
+                return;
+            }
+
+            // Calculate the exact offset to center the next card
+            const containerRect = container.getBoundingClientRect();
+            const containerCenter = containerRect.left + container.clientWidth / 2;
+            
+            let targetChild = null;
+            for (let child of container.children) {
+                const childRect = child.getBoundingClientRect();
+                const childCenter = childRect.left + child.clientWidth / 2;
+                
+                // If this child's center is to the right of the container's center, it's the "next" card
+                if (childCenter > containerCenter + 20) {
+                    targetChild = child;
+                    break;
+                }
+            }
+            
+            if (targetChild) {
+                const childRect = targetChild.getBoundingClientRect();
+                const childCenter = childRect.left + targetChild.clientWidth / 2;
+                const offset = childCenter - containerCenter;
+                container.scrollBy({ left: offset, behavior: 'smooth' });
             } else {
-                container.scrollBy({ left: window.innerWidth * 0.4, behavior: 'smooth' });
+                container.scrollTo({ left: 0, behavior: 'smooth' });
             }
         }, 5000);
     });

@@ -1533,6 +1533,7 @@ button {
     border-radius: 12px;
     flex-shrink: 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    scroll-snap-align: center;
 }
 
 .horizontal-trainer-card img {
@@ -4439,4 +4440,13 @@ i { display: inline-flex; align-items: center; justify-content: center; }
 .message strong {
     font-weight: 700;
     color: #000;
+}
+
+/* Ensure horizontal scroll cards snap perfectly to the center on mobile */
+.program-card,
+.program-intro-card,
+.horizontal-trainer-card,
+.trainer-intro-card,
+.minimal-slider-slide {
+    scroll-snap-align: center;
 }
