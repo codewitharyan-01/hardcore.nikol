@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // so motion is perfectly buttery — no abrupt jumps.
     // ============================================================
 
-    const LERP = 0.09; // Smoothing factor (0 = frozen, 1 = instant)
+    const LERP = 0.11; // Smoothing factor — higher = snappier (0 = frozen, 1 = instant)
 
     // --- 11. Facilities Slider (scroll-linked, crossfade) ---
     const facilitySection = document.getElementById('facility');
@@ -354,12 +354,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const trainerTrack   = document.getElementById('trainer-scroll-track');
     let trainerTargetX   = 0;
     let trainerCurrentX  = 0;
+    let trainerNeedsRender = false;
 
     // --- 12.5. Programs Horizontal Scroll ---
     const programSection = document.getElementById('programs');
     const programTrack   = document.getElementById('program-scroll-track');
     let programTargetX   = 0;
     let programCurrentX  = 0;
+    let programNeedsRender = false;
 
     // --- 13. Stacking Panels ---
     const stackPanels = document.querySelectorAll('.stack-panel');
@@ -368,10 +370,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastScrollY = window.scrollY - 1; // force first run
     let winHeight = window.innerHeight;
     let winWidth = window.innerWidth;
-    
+    let rafId = null;
+
     window.addEventListener('resize', () => {
         winHeight = window.innerHeight;
         winWidth = window.innerWidth;
+        // Recalculate targets on resize
+        trainerCurrentX = trainerTargetX = 0;
+        programCurrentX = programTargetX = 0;
+        if (trainerTrack) trainerTrack.style.transform = 'translate3d(0, 0, 0)';
+        if (programTrack) programTrack.style.transform = 'translate3d(0, 0, 0)';
     }, { passive: true });
 
     const programCards = programTrack ? programTrack.querySelectorAll('.program-card') : [];
@@ -404,22 +412,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rect = trainerSection.getBoundingClientRect();
                 const scrollDistance = 75 - rect.top;
                 const maxScroll = rect.height - winHeight;
+                const maxTranslate = trainerTrack.scrollWidth - winWidth;
                 if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
                     const progress = scrollDistance / maxScroll;
-                    trainerTargetX = progress * (trainerTrack.scrollWidth - winWidth);
+                    trainerTargetX = progress * maxTranslate;
                 } else if (scrollDistance < 0) {
                     trainerTargetX = 0;
                 } else {
-                    trainerTargetX = trainerTrack.scrollWidth - winWidth;
+                    trainerTargetX = maxTranslate;
                 }
+                trainerNeedsRender = true;
             }
-            trainerCurrentX += (trainerTargetX - trainerCurrentX) * LERP;
-            const moving = Math.abs(trainerCurrentX - trainerTargetX) > 0.5;
-            if (moving) {
-                trainerTrack.style.transform = `translate3d(-${trainerCurrentX}px, 0, 0)`;
-            } else if (isScrolling) {
-                trainerCurrentX = trainerTargetX;
-                trainerTrack.style.transform = `translate3d(-${trainerTargetX}px, 0, 0)`;
+            if (trainerNeedsRender) {
+                const diff = trainerTargetX - trainerCurrentX;
+                if (Math.abs(diff) > 0.3) {
+                    trainerCurrentX += diff * LERP;
+                    trainerTrack.style.transform = `translate3d(-${trainerCurrentX}px, 0, 0)`;
+                } else {
+                    trainerCurrentX = trainerTargetX;
+                    trainerTrack.style.transform = `translate3d(-${trainerTargetX}px, 0, 0)`;
+                    trainerNeedsRender = false;
+                }
             }
         }
 
@@ -429,26 +442,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rect = programSection.getBoundingClientRect();
                 const scrollDistance = 75 - rect.top;
                 const maxScroll = rect.height - winHeight;
+                const maxTranslate = programTrack.scrollWidth - winWidth;
                 if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
                     const progress = scrollDistance / maxScroll;
-                    programTargetX = progress * (programTrack.scrollWidth - winWidth);
+                    programTargetX = progress * maxTranslate;
                 } else if (scrollDistance < 0) {
                     programTargetX = 0;
                 } else {
-                    programTargetX = programTrack.scrollWidth - winWidth;
+                    programTargetX = maxTranslate;
+                }
+                programNeedsRender = true;
+            }
+            if (programNeedsRender) {
+                const diff = programTargetX - programCurrentX;
+                if (Math.abs(diff) > 0.3) {
+                    programCurrentX += diff * LERP;
+                    programTrack.style.transform = `translate3d(-${programCurrentX}px, 0, 0)`;
+                } else {
+                    programCurrentX = programTargetX;
+                    programTrack.style.transform = `translate3d(-${programTargetX}px, 0, 0)`;
+                    programNeedsRender = false;
                 }
             }
-            programCurrentX += (programTargetX - programCurrentX) * LERP;
-            const moving = Math.abs(programCurrentX - programTargetX) > 0.5;
-            if (moving) {
-                programTrack.style.transform = `translate3d(-${programCurrentX}px, 0, 0)`;
-            } else if (isScrolling) {
-                programCurrentX = programTargetX;
-                programTrack.style.transform = `translate3d(-${programTargetX}px, 0, 0)`;
-            }
 
-            // Card highlight — batch reads then writes
-            if (programCards.length > 0 && (moving || isScrolling)) {
+            // Card highlight — only when scrolling or lerp still settling
+            if (programCards.length > 0 && (isScrolling || programNeedsRender)) {
                 const windowCenter = winWidth / 2;
                 const cardCenters  = Array.from(programCards).map(card => {
                     const r = card.getBoundingClientRect();
@@ -488,11 +506,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         lastScrollY = scrollY;
-        requestAnimationFrame(unifiedScrollLoop);
+        rafId = requestAnimationFrame(unifiedScrollLoop);
     }
 
     // Kick off the loop
-    requestAnimationFrame(unifiedScrollLoop);
+    rafId = requestAnimationFrame(unifiedScrollLoop);
 
     // 14. Creative Testimonial Carousel
     const testiSlides       = document.querySelectorAll('.testi-slide');

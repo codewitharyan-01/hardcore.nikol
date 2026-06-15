@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendChatBtn = document.getElementById('send-chat-btn');
     const chatMessages = document.getElementById('chat-messages');
     const typingIndicator = document.getElementById('chat-typing-indicator');
-    const quickPrompts = document.querySelectorAll('.quick-prompt-btn');
+
 
     if (!chatToggleBtn || !chatBox) return;
 
@@ -31,11 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
     chatToggleBtn.addEventListener('click', () => {
         chatBox.classList.remove('hidden');
         chatToggleBtn.style.transform = 'scale(0)';
+        document.body.style.overflow = 'hidden';
     });
 
     closeChatBtn.addEventListener('click', () => {
         chatBox.classList.add('hidden');
         chatToggleBtn.style.transform = 'scale(1)';
+        document.body.style.overflow = '';
     });
 
     clearChatBtn.addEventListener('click', () => {
@@ -45,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const parseMarkdown = (text) => {
+        if (typeof marked !== 'undefined') {
+            return marked.parse(text);
+        }
         let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
         html = html.replace(/\n/g, '<br>');
@@ -90,7 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }));
             
             // Add current message with system instruction prepended if it's the first
-            const instruction = "You are a highly premium, energetic gym assistant for Hardcore Fitness. Keep answers brief, structured, and engaging. ";
+            const instruction = `You are the Hardcore AI Coach, an energetic gym assistant for Hardcore Fitness in Naroda area, Ahmedabad. 
+Keep answers brief, structured, and engaging. FORMAT: Use markdown tables for plans/timings and horizontal lines (---) to separate sections.
+GYM INFO:
+- Timings: Mon-Sat 5:30 AM - 11:00 PM, Sun 6:00 AM - 11:00 AM
+- Plans: 1 Month (₹4,000), 3 Months (₹6,500), 6 Months (₹7,500), 12 Months (₹12,000)
+- Contact: Phone/WhatsApp +91 96872 22006.
+User: `;
             contents.push({
                 role: 'user',
                 parts: [{ text: instruction + userText }]
@@ -142,12 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (this.value === '') this.style.height = 'auto';
     });
 
-    // Quick prompts
-    quickPrompts.forEach(btn => {
-        btn.addEventListener('click', () => {
-            handleSend(btn.textContent);
-        });
-    });
 
     // Init
     loadHistory();

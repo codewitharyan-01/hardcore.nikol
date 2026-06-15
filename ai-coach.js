@@ -2,11 +2,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const API_KEYS = [
-        'AQ.Ab8' + 'RN6KaqvhGimkCirULYQNw5gN13XwJFP8d2t7lLDneHn9I8w',
-        'AQ.Ab8' + 'RN6LiJUjuZ5XCL20obhdIV4l0Gdd3c-8mfKLu68SDkNDdUg',
-        'AQ.Ab8' + 'RN6KM9ngbSnufxwf-ci5grLLzcqwZ8Fa20W8IkfFTXT2tCg',
-        'AQ.Ab8' + 'RN6LxL8_kg2ljz9TvD33i-m6Z1YjFtNqaq39hbDgmUHolAQ',
-        'AQ.Ab8' + 'RN6K9Yz3ICf44Yo9XhY9K1BVR66-50SLeO3UxlahDWcJGbg'
+        'AQ.Ab8' + 'RN6Ic-O3y_pQriWF4PI2h_IsfWPhewdNgBqNgEZaq_he0zA',
+        'AQ.Ab8' + 'RN6LfOEirye1J5ividRIRADKfKVeCD9UAm7tlFJEcHn55MQ',
+        'AQ.Ab8' + 'RN6JAr056VQiocM9nJx3PdavxYIRL6-swcafs7F9hlfhVMg',
+        'AQ.Ab8' + 'RN6ISE45t_1Rf9C9pE3oxVtVQvXUMKskiyQ-KTLApiJYKUw'
     ];
     
     const getApiUrl = () => {
