@@ -670,3 +670,29 @@ document.addEventListener('DOMContentLoaded', () => {
         lazyVideos.forEach(v => v.play().catch(e => {}));
     }
 });
+
+// ====== AUTO-SCROLL HORIZONTAL SECTIONS ======
+document.addEventListener('DOMContentLoaded', () => {
+    const autoScrollContainers = document.querySelectorAll('.program-sticky, #facility .sticky-container, .trainer-sticky');
+    autoScrollContainers.forEach(container => {
+        let isInteracting = false;
+        container.addEventListener('touchstart', () => isInteracting = true, { passive: true });
+        container.addEventListener('touchend', () => {
+            setTimeout(() => isInteracting = false, 2000);
+        }, { passive: true });
+        container.addEventListener('mouseenter', () => isInteracting = true);
+        container.addEventListener('mouseleave', () => isInteracting = false);
+
+        setInterval(() => {
+            if (isInteracting) return;
+
+            const maxScroll = container.scrollWidth - container.clientWidth;
+            
+            if (container.scrollLeft >= maxScroll - 10) {
+                container.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: window.innerWidth * 0.4, behavior: 'smooth' });
+            }
+        }, 5000);
+    });
+});
