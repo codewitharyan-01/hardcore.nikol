@@ -300,6 +300,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.fade-up, .hero-image').forEach(el => observer.observe(el));
 
+    // 10.b Intersection Observer for Program Cards Highlight
+    const programCardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            } else {
+                entry.target.classList.remove('active');
+            }
+        });
+    }, {
+        root: document.querySelector('.program-sticky'),
+        rootMargin: '0px -25% 0px -25%',
+        threshold: 0.1
+    });
+
+    const pCards = document.querySelectorAll('.program-card');
+    pCards.forEach(card => {
+        programCardObserver.observe(card);
+    });
+
     // 10. Real-time BMI Dashboard
     const bmiWeight = document.getElementById('bmi-weight');
     const bmiHeight = document.getElementById('bmi-height');
@@ -388,99 +408,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrollY = window.scrollY;
         const isScrolling = scrollY !== lastScrollY;
 
-        // ---- Facility Slider ----
-        if (isScrolling && facilitySection && scrollSlides.length > 0) {
-            const rect = facilitySection.getBoundingClientRect();
-            const scrollDistance = 75 - rect.top;
-            const maxScroll = rect.height - winHeight;
-            let slideIndex = 0;
-            if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
-                const progress = scrollDistance / maxScroll;
-                slideIndex = Math.min(Math.floor(progress * scrollSlides.length), scrollSlides.length - 1);
-            } else if (scrollDistance > maxScroll) {
-                slideIndex = scrollSlides.length - 1;
-            }
-            scrollSlides.forEach((slide, i) => {
-                if (i === slideIndex) slide.classList.add('active');
-                else slide.classList.remove('active');
-            });
-        }
+        // ---- Facility Slider (Native Horizontal Scroll Now) ----
+        // Removed scroll-hijacking crossfade logic
 
-        // ---- Trainer Track (lerp) ----
-        if (trainerSection && trainerTrack) {
-            if (isScrolling) {
-                const rect = trainerSection.getBoundingClientRect();
-                const scrollDistance = 75 - rect.top;
-                const maxScroll = rect.height - winHeight;
-                const maxTranslate = trainerTrack.scrollWidth - winWidth;
-                if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
-                    const progress = scrollDistance / maxScroll;
-                    trainerTargetX = progress * maxTranslate;
-                } else if (scrollDistance < 0) {
-                    trainerTargetX = 0;
-                } else {
-                    trainerTargetX = maxTranslate;
-                }
-                trainerNeedsRender = true;
-            }
-            if (trainerNeedsRender) {
-                const diff = trainerTargetX - trainerCurrentX;
-                if (Math.abs(diff) > 0.3) {
-                    trainerCurrentX += diff * LERP;
-                    trainerTrack.style.transform = `translate3d(-${trainerCurrentX}px, 0, 0)`;
-                } else {
-                    trainerCurrentX = trainerTargetX;
-                    trainerTrack.style.transform = `translate3d(-${trainerTargetX}px, 0, 0)`;
-                    trainerNeedsRender = false;
-                }
-            }
-        }
+        // ---- Trainer Track (Native Scroll Now, No Lerp Needed) ----
+        // Removed scroll-hijacking translation
 
-        // ---- Program Track (lerp) ----
-        if (programSection && programTrack) {
-            if (isScrolling) {
-                const rect = programSection.getBoundingClientRect();
-                const scrollDistance = 75 - rect.top;
-                const maxScroll = rect.height - winHeight;
-                const maxTranslate = programTrack.scrollWidth - winWidth;
-                if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
-                    const progress = scrollDistance / maxScroll;
-                    programTargetX = progress * maxTranslate;
-                } else if (scrollDistance < 0) {
-                    programTargetX = 0;
-                } else {
-                    programTargetX = maxTranslate;
-                }
-                programNeedsRender = true;
-            }
-            if (programNeedsRender) {
-                const diff = programTargetX - programCurrentX;
-                if (Math.abs(diff) > 0.3) {
-                    programCurrentX += diff * LERP;
-                    programTrack.style.transform = `translate3d(-${programCurrentX}px, 0, 0)`;
-                } else {
-                    programCurrentX = programTargetX;
-                    programTrack.style.transform = `translate3d(-${programTargetX}px, 0, 0)`;
-                    programNeedsRender = false;
-                }
-            }
-
-            // Card highlight — only when scrolling or lerp still settling
-            if (programCards.length > 0 && (isScrolling || programNeedsRender)) {
-                const windowCenter = winWidth / 2;
-                const cardCenters  = Array.from(programCards).map(card => {
-                    const r = card.getBoundingClientRect();
-                    return r.left + r.width / 2;
-                });
-                programCards.forEach((card, idx) => {
-                    if (Math.abs(cardCenters[idx] - windowCenter) < winWidth * 0.25) {
-                        card.classList.add('active');
-                    } else {
-                        card.classList.remove('active');
-                    }
-                });
-            }
-        }
+        // ---- Program Track ----
+        // Card highlight logic moved to IntersectionObserver for performance
 
         // ---- Stacking Panels ----
         if (isScrolling && stackPanels.length > 0) {

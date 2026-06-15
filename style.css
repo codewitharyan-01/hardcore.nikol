@@ -806,30 +806,27 @@ button {
 
 /* Creative Full-Bleed Split Slider */
 .minimal-slider-track {
-    width: 100%;
-    height: 100vh;
+    display: flex;
+    width: max-content;
+    height: 100%;
     position: relative;
-    overflow: hidden;
     background: transparent;
 }
 
 .minimal-slider-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: relative;
+    width: 100vw;
     height: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), visibility 1s;
+    opacity: 1;
+    visibility: visible;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    scroll-snap-align: start;
 }
 
 .minimal-slider-slide.active {
-    opacity: 1;
-    visibility: visible;
     z-index: 2;
 }
 
@@ -863,33 +860,29 @@ button {
     position: absolute;
     top: 50%;
     left: -5%;
-    transform: translateY(-50%) rotate(-90deg);
+    transform: translateY(-50%) rotate(-90deg) scale(1.05);
     font-size: clamp(10rem, 20vw, 25rem);
     font-weight: 800;
     color: rgba(0, 0, 0, 0.03);
     line-height: 0.8;
     z-index: 0;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity 1s, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0.8;
 }
 
 .minimal-slider-slide.active .slide-num {
-    opacity: 0.8;
-    transform: translateY(-50%) rotate(-90deg) scale(1.05);
+    /* Kept for compatibility */
 }
 
 .text-wrap {
     position: relative;
     z-index: 2;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .minimal-slider-slide.active .text-wrap {
-    opacity: 1;
-    transform: translateY(0);
+    /* Kept for compatibility */
 }
 
 .text-wrap h3 {
@@ -951,14 +944,12 @@ button {
     border-radius: 16px;
     box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.4), -10px -10px 40px rgba(255,255,255,0.8);
     margin-top: -75px;
-    opacity: 0;
-    transform: scale(0.8) translateY(60px) rotate(-10deg);
-    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    opacity: 1;
+    transform: scale(1) translateY(0) rotate(0deg);
 }
 
 .minimal-slider-slide.active .minimal-image img {
-    opacity: 1;
-    transform: scale(1) translateY(0) rotate(0deg);
+    /* Kept for compatibility */
 }
 
 @media (max-width: 900px) {

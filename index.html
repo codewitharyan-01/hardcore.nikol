@@ -315,9 +315,9 @@
 
 
     <!-- ====== TRAINING PROGRAMS SECTION (Horizontal Scroll) ====== -->
-    <section id="programs" style="height: 400vh; position: relative; padding: 0; background: var(--color-black);">
+    <section id="programs" style="position: relative; padding: 0; background: var(--color-black);">
         <div class="program-sticky"
-            style="position: sticky; top: 75px; height: calc(100vh - 75px); width: 100vw; overflow: hidden; background: transparent; display: flex; flex-direction: column; justify-content: center;">
+            style="width: 100vw; overflow-x: auto; overflow-y: hidden; background: transparent; display: flex; flex-direction: column; justify-content: center; height: calc(100vh - 75px); scroll-snap-type: x mandatory;">
 
             <!-- Background Video -->
             <video class="hero-video-bg" autoplay muted loop playsinline style="opacity: 0.05;">
@@ -482,9 +482,9 @@
 
 
     <!-- Minimalist Split Scroll Gallery -->
-    <section id="facility" style="height: 400vh; position: relative; background: var(--color-white);">
+    <section id="facility" style="position: relative; background: var(--color-white);">
         <div class="sticky-container"
-            style="position: sticky; top: 75px; height: calc(100vh - 75px); width: 100vw; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-left: calc(-50vw + 50%); background: var(--color-white);">
+            style="height: calc(100vh - 75px); width: 100vw; overflow-x: auto; overflow-y: hidden; display: flex; align-items: stretch; justify-content: flex-start; scroll-snap-type: x mandatory; margin-left: calc(-50vw + 50%); background: var(--color-white);">
 
             <!-- Creative Animated Background Elements -->
             <div
@@ -669,9 +669,9 @@
 #membership { position: relative; z-index: 1; }
 
     <!-- Expert Trainers Section (Horizontal Scroll Gallery) -->
-    <section id="trainers" style="height: 300vh; position: relative; padding: 0; background: var(--color-light-gray);">
+    <section id="trainers" style="position: relative; padding: 0; background: var(--color-light-gray);">
         <div class="trainer-sticky"
-            style="position: sticky; top: 75px; height: calc(100vh - 75px); width: 100vw; overflow: hidden; background: var(--color-light-gray); display: flex; flex-direction: column; justify-content: center;">
+            style="height: calc(100vh - 75px); width: 100vw; overflow-x: auto; overflow-y: hidden; background: var(--color-light-gray); display: flex; flex-direction: column; justify-content: center; position: relative; scroll-snap-type: x mandatory;">
 
             <!-- ===== IMMERSIVE BACKGROUND LAYER ===== -->
             <div class="trainer-bg-layer" aria-hidden="true">
@@ -1469,52 +1469,6 @@
 
 
 
-    <!-- AI Chat Box UI -->
-    <div id="ai-chat-widget">
-        <button id="chat-toggle-btn" class="magnetic" aria-label="Open Chat">
-            <img src="logo.webp" alt="Hardcore AI"
-                style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-        </button>
-        <div id="chat-box" class="hidden">
-            <div class="chat-header">
-                <div class="chat-header-info">
-                    <img src="logo.webp" alt="Logo" class="chat-header-logo"
-                        style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; margin-right: 8px;">
-                    <h3>Hardcore AI</h3>
-                    <span class="chat-status">Online</span>
-                </div>
-                <div class="chat-header-actions">
-                    <button id="clear-chat-btn" aria-label="Clear Chat" title="Clear Chat"><i
-                            class="ph-light ph-trash"></i></button>
-                    <button id="close-chat-btn" aria-label="Close Chat"><i class="ph-light ph-x"></i></button>
-                </div>
-            </div>
-
-            <div id="chat-messages">
-                <!-- Messages go here -->
-            </div>
-
-            <!-- Typing Indicator -->
-            <div id="chat-typing-indicator" class="hidden">
-                <span class="typing-text">AI is typing</span>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-            </div>
-
-            <div class="chat-bottom-wrapper">
-
-                <div class="chat-input-area">
-                    <textarea id="chat-input" placeholder="Ask anything..." rows="1" maxlength="500"></textarea>
-                    <button id="send-chat-btn"><i class="ph-fill ph-paper-plane-right"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="config.js"></script>
-    <script src="chat.js"></script>
     <script src="script.js"></script>
     <script>
         // Price countdown animation
