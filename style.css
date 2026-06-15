@@ -2059,35 +2059,102 @@ button {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* ====== FREEZE LOGO SECTION ====== */
-.freeze-logo-section {
-    position: relative;
-    height: 35vh;
-    min-height: 250px;
-    background: #050505;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+/* Parallax Divider */
+.parallax-divider {
+    height: clamp(40vh, 50vh, 60vh);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: background-position;
 }
 
-.freeze-logo-inner {
+.parallax-2 {
+    position: relative;
+    background: linear-gradient(135deg, #0a0a0a 0%, #222 25%, #ff2a00 50%, #ff8c00 75%, #e0e0e0 100%);
+    background-size: 300% 300%;
+    background-attachment: fixed;
+    /* Freezes the base gradient */
+    animation: premiumGradient 15s ease infinite;
+    height: clamp(40vh, 50vh, 60vh);
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* Rotating creative rays effect behind logo, frozen to viewport */
+.parallax-2::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(from var(--angle) at center,
+            transparent 0deg,
+            rgba(255, 42, 0, 0.4) 60deg,
+            transparent 120deg,
+            rgba(224, 224, 224, 0.3) 180deg,
+            transparent 240deg,
+            rgba(255, 140, 0, 0.4) 300deg,
+            transparent 360deg);
+    background-attachment: fixed;
+    /* Freezes rays with the logo */
+    animation: spinRaysFixed 25s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* The actual logo with parallax effect */
+.parallax-2::after {
+    content: '';
     position: absolute;
     inset: 0;
     background-image: url('logo.webp');
-    background-size: 35vw auto;
+    background-size: 40%;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
-    z-index: 1;
+    z-index: 2;
+    filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+@media (max-width: 768px) {
+    .parallax-divider,
+    .parallax-2 {
+        /* Fix iOS fixed background zoom bug by using viewport units instead of cover */
+        background-size: auto 100vh !important;
+        background-position: center center !important;
+    }
+    .parallax-2::before {
+        background-size: 100vw 100vh !important;
+    }
+    .parallax-2::after {
+        background-size: 80vw auto !important;
+        background-position: center center !important;
+    }
 }
 
-@media (max-width: 768px) {
-    .freeze-logo-inner {
-        /* Fix iOS fixed background zoom bug by using viewport units instead of cover */
-        background-size: 70vw auto !important;
-        background-position: center center !important;
+@keyframes premiumGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes spinRaysFixed {
+    0% {
+        --angle: 0deg;
+    }
+
+    100% {
+        --angle: 360deg;
     }
 }
 
